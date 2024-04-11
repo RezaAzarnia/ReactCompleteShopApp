@@ -1,0 +1,47 @@
+.cart-summary-container {
+  @include position(sticky, 75px);
+  flex: 1.5;
+  background: var(--cloud-gray);
+  padding: 20px;
+  border-radius: 2px;
+  min-width: 400px;
+  height: 100dvh;
+  min-height: 90vh;
+  form {
+    margin: 10px 0 0;
+  }
+  .cart-summary-row {
+    @include flex(column, space-between);
+    height: 100%;
+  }
+  h3.cart-summary-title {
+    @include text-format(20px, $fontFamilly: "Estedad-bold");
+  }
+}
+.cart-summary-price-row {
+  @include flex($justify: space-between);
+  @include text-format(18px, var(--midnight-black), $fontFamilly: "Iran Yekan");
+  padding: 30px 0 20px;
+  border-bottom: 0.75px solid lightgray;
+}
+.cart-summary-row {
+  .ship-infos {
+    padding-bottom: 15px;
+    line-height: 2;
+    .ship-text {
+      @include text-format(18px, $fontFamilly: "Estedad-bold");
+    }
+    .ship-to,
+    .ship-free {
+      @include text-format(15px, var(--charcoal-hover));
+    }
+  }
+  .cart-price {
+    @include text-format(20px, var(--midnight-black));
+  }
+}
+@media screen and (max-width: 1200px) {
+  .cart-summary-container {
+    min-width: 250px;
+  }
+}

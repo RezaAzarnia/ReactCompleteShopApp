@@ -1,0 +1,55 @@
+.wishlistTitle {
+  margin: 60px 0 20px;
+  @include text-format(22px, $fontFamilly: "Estedad-bold");
+}
+.image-part {
+  position: relative;
+  button {
+    @include position(absolute, $left: 0);
+    @include size(20px, 20px);
+    @include flex($align: center, $justify: center);
+    background: var(--white);
+    border: none;
+    box-shadow: 0px 0px 2px 1px gray;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+}
+.wishlist-table-row {
+  grid-template-columns: repeat(4, 1fr);
+  justify-items: start;
+  th:last-of-type,
+  td:last-child {
+    @include flex($justify: flex-end, $gap: 10px);
+    width: 100%;
+  }
+}
+.empty-wishlist {
+  margin: 60px auto;
+  text-align: center;
+}
+@include device-breakpoint("large-mobile") {
+  .wishlistContainer {
+    padding: 20px;
+    .wishlist-table-row {
+      td:last-child {
+        @include flex(
+          $direction: column,
+          $align: center,
+          $justify: center,
+          $gap: 10px
+        );
+        width: 100%;
+      }
+    }
+  }
+  .wishlistContainer {
+    table td {
+      text-align: center;
+      &::before {
+        content: attr(data-label);
+        @include text-format(14px, #000000cc, "Yekan");
+      }
+    }
+  }
+}

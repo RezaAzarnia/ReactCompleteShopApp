@@ -1,0 +1,8 @@
+.mainSection {
+  padding-bottom: 306px;
+}
+@include device-breakpoint("tablet-size"){
+  .mainSection {
+    padding-bottom: 0;
+  }
+}

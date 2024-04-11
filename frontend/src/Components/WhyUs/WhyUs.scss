@@ -1,0 +1,123 @@
+.whyChooseUsWrapper {
+  padding: 20px 20px 50px;
+  background: url(/public/section-background.jpg);
+  background-position: center;
+  .whyUsRow {
+    @include grid($columns: 25% 50% 25%, $rows: auto, $gap: 10px);
+    justify-items: center;
+    justify-content: center;
+  }
+}
+.whyUsRow {
+  .left-side {
+    grid-column: 4 / 3;
+    text-align: left;
+  }
+  .middle-side {
+    grid-column: 3 / 2;
+    grid-row: 1;
+    text-align: center;
+  }
+  .right-side {
+    grid-column: 2 / 1;
+    grid-row: 1;
+    text-align: justify;
+  }
+}
+
+.whyUsRow {
+  .left-side,
+  .right-side {
+    @include flex(column, space-around);
+  }
+}
+.whyUsRow .whyusInfo {
+  line-height: 1.75;
+  .infoTitle > h3 {
+    position: relative;
+    @include text-format(24px, $fontFamilly: "Estedad-bold");
+    margin-bottom: 15px;
+    &::after {
+      content: "";
+      @include position(absolute, $bottom: -4px);
+      @include size(70px, 2px);
+      background-color: var(--light-gray);
+    }
+  }
+  .info-description > p {
+    @include text-format(15px, var(--steel-gray));
+    font-weight: 300;
+  }
+}
+.whyUsRow {
+  .right-side .infoTitle > h3 {
+    &::after {
+      right: 0;
+    }
+  }
+  .left-side .infoTitle > h3 {
+    &::after {
+      left: 0;
+    }
+  }
+}
+@include device-breakpoint("large-mobile") {
+  .whyChooseUsWrapper {
+    background-position: bottom;
+    background-attachment: fixed;
+  }
+
+  .whyChooseUsWrapper .whyUsRow {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    .middle-side {
+      grid-column: 1 / 3;
+      img {
+        width: 80%;
+      }
+    }
+  }
+  .whyUsRow {
+    .left-side {
+      grid-column: auto;
+    }
+    .left-side,
+    .right-side {
+      grid-row: -1;
+      gap: 25px;
+    }
+  }
+}
+
+@include device-breakpoint("phone-size") {
+  .whyChooseUsWrapper {
+    .whyUsRow {
+      grid-template-columns: 1fr;
+      gap: 40px;
+
+      .left-side,
+      .middle-side,
+      .right-side {
+        text-align: center;
+        grid-column: auto;
+        gap: 45px;
+      }
+      .right-side {
+        grid-row: auto;
+      }
+    }
+  }
+
+  .whyChooseUsWrapper .whyUsRow {
+    .info-description > p {
+      font-size: 13px;
+    }
+    .infoTitle > h3 {
+      &::after {
+        right: auto;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+}

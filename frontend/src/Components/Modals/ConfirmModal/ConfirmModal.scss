@@ -1,0 +1,25 @@
+.confirm-modal {
+  gap: 10px;
+  max-width: 740px;
+  text-align: right;
+  padding: 30px 20px;
+  line-height: 1.75;
+  .modal-header {
+    @include flex($justify: space-between, $align: center);
+    height: 25px;
+    font-family: "Yekan";
+    padding: 0 0 5px;
+
+    .exit-part > span {
+      @include text-format(28px, $cursor: pointer);      
+    }
+  }
+}
+.confirm-modal-button {
+  @include flex($justify: end , $gap:10px);
+  width: 100%;
+  button {
+    padding: 7px 12px;
+    @include text-format(14px, $fontFamilly: "Iran Yekan");
+  }
+}

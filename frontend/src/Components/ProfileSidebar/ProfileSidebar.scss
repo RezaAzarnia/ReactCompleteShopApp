@@ -1,0 +1,18 @@
+.profile-menu-list {
+  .profile-menu-list-item {
+    padding: 15px;
+    margin: 10px 0;
+    background-color: var(--cloud-gray);
+    transition: all 0.2s;
+    &:hover {
+      border-right: 4px solid var(--primary);
+    }
+    a {
+      display: block;
+    }
+  }
+}
+
+.profile-menu-list-item:has(> a.active) {
+  border-right: 4px solid var(--primary);
+}

@@ -1,0 +1,119 @@
+.navbarContainer {
+  padding: 35px 0;
+  border-bottom: 0.75px solid lightgray;
+  .navbar-row {
+    @include flex($justify: space-between, $align: center);
+  }
+}
+.navbar-row .logo-part {
+  margin-top: 16px;
+  width: 0;
+  img {
+    width: 140px;
+  }
+}
+
+.navbar-row {
+  .search-part {
+    width: 25%;
+  }
+  .search-input-row {
+    @include flex($align: center);
+    position: relative;
+    width: 100%;
+    input.search-input {
+      padding: 7px 10px;
+      border-radius: 30px;
+      border: none;
+      background: var(--cloud-gray);
+      width: 100%;
+    }
+    .search-icon {
+      @include position(absolute, $left: 20px);
+      @include text-format(20px, $cursor: pointer);
+    }
+  }
+}
+.navbar-row .icons-part {
+  .icons-row {
+    @include flex($justify: flex-end, $align: center);
+    gap: 15px;
+    margin-left: 5px;
+  }
+  .navbar-icon {
+    @include text-format(28px, $cursor: pointer);
+  }
+}
+
+.user-cart {
+  position: relative;
+  .cart-badge {
+    @include position(absolute, $bottom: -5px, $left: -5px);
+    @include size(18px, 18px);
+    @include flex($justify: center, $align: center);
+    @include text-format(12px, var(--white));
+    background: var(--primary);
+    border-radius: 50%;
+  }
+}
+
+.hamburger-icon {
+  display: none;
+  svg {
+    cursor: pointer;
+  }
+}
+.icons-part {
+  width: 32%;
+}
+
+@include device-breakpoint("large-mobile") {
+  .navbarContainer .navbar-row {
+    .hamburger-icon,
+    .logo-part,
+    .icons-part {
+      width: 33.33%;
+    }
+  }
+
+  .navbarContainer {
+    padding: 0;
+    .search-part {
+      display: none;
+    }
+    .navbar-row {
+      align-items: flex-start;
+      justify-items: start;
+      padding: 15px 10px;
+    }
+  }
+  .navbarContainer .navbar-row {
+    .logo-part {
+      margin: 0;
+      text-align: center;
+      img {
+        width: 109px;
+      }
+    }
+  }
+  .hamburger-icon {
+    display: block;
+    svg {
+      font-size: 30px;
+    }
+  }
+  .search-part {
+    display: none;
+  }
+  .profile-part,
+  .wishlist-part {
+    display: block;
+  }
+}
+
+@include device-breakpoint("phone-size") {
+  .profile-part,
+  .wishlist-part {
+    display: none;
+  }
+}

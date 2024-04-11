@@ -1,0 +1,181 @@
+.product-detail-wrapper {
+}
+.product-detail-row {
+  @include flex($gap: 10px);
+  width: 100%;
+  margin-top: 20px;
+  padding: 20px;
+  .product-picture {
+    @include size(50%, 100%);
+  }
+  .text-gray {
+    color: #878787;
+  }
+}
+
+.product-infos {
+  .product-row {
+    @include flex($justify: space-between, $align: center);
+    margin: 20px 0;
+    .text-bold {
+      @include text-format(28px, var(--slate-gray));
+      font-weight: bold;
+    }
+  }
+}
+.product-description {
+  line-height: 2;
+  margin-top: 30px;
+  text-align: justify;
+  color: #878787;
+}
+.product-actions {
+  margin: 30px 0;
+  @include flex;
+  gap: 20px;
+  .action-row {
+    @include flex($align: center, $gap: 3px);
+    @include text-format(17px, $fontFamilly: "Estedad-bold", $cursor: pointer);
+  }
+}
+.product-actions .action-row {
+  .compare-icon {
+    font-size: 30px;
+  }
+  .heart-icon {
+    font-size: 20px;
+    &.filled {
+      color: var(--luminous-vivid-orange);
+    }
+  }
+}
+
+.add-wishlist:hover {
+  .heart-icon,
+  h3 {
+    transition: all 0.2s;
+    color: var(--luminous-vivid-orange);
+  }
+}
+.add-to-cart {
+  margin: 30px 0;
+  @include grid($columns: 1fr);
+  align-items: center;
+  .add-text {
+    font-size: 18px;
+    font-family: "Yekan";
+  }
+  .addCartButton {
+    @include flex($justify: center, $align: center, $gap: 5px);
+    @include text-format(18px, var(--white), "Yekan", pointer);
+    background: var(--primary);
+    border: none;
+    padding: 10px;
+    .bag-icon {
+      font-size: 20px;
+    }
+  }
+}
+.in-Cart {
+  margin: 30px 0;
+  @include flex($align: center);
+  gap: 20px;
+  .modify-count-cart {
+    width: 130px;
+  }
+}
+.in-Cart {
+  .see-cart p {
+    margin-top: 10px;
+    @include text-format(16px, $fontFamilly: "Yekan");
+  }
+  .see-cart a {
+    @include text-format(15px, var(--swiper-theme-color));
+  }
+}
+
+.category-info {
+  text-align: right;
+  margin: 20px 0;
+  .category-row {
+    padding: 15px 0;
+  }
+}
+
+.social-apps {
+  @include flex;
+  .share-row {
+    @include flex($gap: 15px);
+    svg {
+      @include text-format(18px, $cursor: pointer);
+      &:hover {
+        color: var(--midnight-black);
+      }
+    }
+  }
+}
+
+.slider-arrows {
+  @include flex;
+  svg {
+    cursor: pointer;
+  }
+}
+.prev-product-container,
+.next-product-container {
+  position: relative;
+  .next-arrow,
+  .prev-arrow {
+    @include size(100%, 100%);
+  }
+}
+
+.next-arrow,
+.prev-arrow {
+  button {
+    @include flex;
+    border: none;
+    padding: 5px;
+    background: transparent;
+    cursor: pointer;
+  }
+}
+.product-preview {
+  @include position(absolute, $left: 0);
+  @include size(100px, max-content);
+  background-color: var(--white);
+  box-shadow: 0 0 3px 0 gray;
+  padding: 5px;
+  text-align: center;
+  img {
+    @include size(100%, 100%);
+  }
+}
+.swiper-slide img {
+  @include size(95%, 100%);
+  display: block;
+  object-fit: cover;
+  margin-left: 0;
+}
+
+.mySwiper4 {
+  height: 20%;
+  box-sizing: border-box;
+  padding: 10px 0;
+  .swiper-slide {
+    @include size(25%, 100%);
+    opacity: 0.4;
+  }
+  .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+}
+
+@include device-breakpoint("tablet-size") {
+  .product-detail-row {
+    flex-direction: column;
+    .product-picture {
+      width: 100%;
+    }
+  }
+}

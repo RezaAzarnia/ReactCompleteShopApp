@@ -1,0 +1,55 @@
+.order-detail {
+  margin: 25px 0;
+  h2 {
+    @include text-format(28px, $fontFamilly: "Estedad-bold");
+  }
+  .order-detail-box {
+    border: 1px solid var(--light-gray);
+    padding: 10px 20px;
+    margin: 30px 0 0;
+  }
+}
+.order-detail {
+  .order-detail-row {
+    @include flex($justify: space-between);
+    padding: 20px 0;
+  }
+  span.order-text {
+    @include text-format(14px, gray);
+  }
+  span.order-text-bold {
+    font-weight: 600;
+  }
+}
+.address-row {
+  @include flex;
+  gap: 20px;
+  .billing-address,
+  .shipping-address {
+    width: 50%;
+    h3 {
+      padding: 10px 0;
+      @include text-format(20px, $fontFamilly: "Yekan");
+    }
+  }
+}
+
+.address-list {
+  margin: 15px 0;
+  .address-list-item {
+    padding: 15px 0;
+    font-family: "Yekan";
+  }
+}
+@include device-breakpoint("phone-size") {
+  .order-detail .order-detail-box {
+    padding: 10px;
+  }
+  .address-row {
+    flex-direction: column;
+    .billing-address,
+    .shipping-address {
+      width: 100%;
+    }
+  }
+}

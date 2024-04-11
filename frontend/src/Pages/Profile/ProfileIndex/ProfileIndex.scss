@@ -1,0 +1,37 @@
+.profile-text {
+  line-height: 2;
+  margin-bottom: 20px;
+  text-align: justify;
+  font-size: 14px;
+}
+.profile-cards-row {
+  @include grid($columns: repeat(3, 1fr), $rows: repeat(2, 190px), $gap: 25px);
+  justify-content: start;
+}
+.profile-menu-card {
+  border: 1px solid var(--light-gray);
+  @include flex(column, center, center);
+  transition: all 0.3s;
+  .menu-card-link {
+    @include flex(column, $justify: center);
+    @include size(100%, 100%);
+    text-align: center;
+  }
+  &:hover {
+    box-shadow: 0px 1px 5px 0px gray;
+  }
+}
+.profile-menu-card {
+  .card-icon {
+    text-align: center;
+    svg {
+      font-size: 50px;
+    }
+  }
+}
+@include device-breakpoint("phone-size") {
+  .profile-cards-row {
+    grid-template-columns: repeat(1, 1fr);
+    grid-template-rows: repeat(6, 190px);
+  }
+}

@@ -1,0 +1,61 @@
+.customerCareServiceWrapper {
+  padding: 55px 0;
+  border-bottom: 0.75px solid lightgray;
+}
+
+.careCardWrapper > .care-card {
+  @include flex($justify: center, $align: center, $gap: 20px);
+  padding: 10px 0;
+  .card-logo {
+    padding: 13px;
+    background: #feeee9;
+    border-radius: 50%;
+    color: var(--primary);
+    opacity: 0.9;
+    transition: all 0.5s;
+    position: relative;
+    svg {
+      font-size: 3rem;
+    }
+  }
+}
+.care-card {
+  &:hover .card-logo {
+    &::after {
+      content: "";
+      @include position(absolute, $bottom: -5.5px, $right: -5.47px);
+      @include size(100%, 100%);
+      border: 3px solid var(--primary);
+      border-radius: 50%;
+      padding: 3px;
+      animation: showScale 0.2s;
+    }
+    background-color: var(--primary) !important;
+    color: var(--white) !important;
+  }
+}
+@keyframes showScale {
+  from {
+    scale: 0;
+  }
+  to {
+    scale: 1;
+  }
+}
+.care-card {
+  .card-body {
+    line-height: 1.3;
+    span {
+      color: var(--steel-gray);
+    }
+    .card-title {
+      @include text-format(25px, $fontFamilly: "Estedad-bold");
+    }
+  }
+}
+
+@include device-breakpoint("large-mobile") {
+  .customerCareServiceWrapper {
+    padding: 40px 0;
+  }
+}

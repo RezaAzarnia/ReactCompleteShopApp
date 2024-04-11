@@ -1,0 +1,62 @@
+.simpleModal {
+  width: 100%;
+  max-width: 70%;
+  max-height: 90%;
+  gap: 15px;
+  align-items: flex-start;
+  .product-detail-wrapper {
+    overflow: auto;
+  }
+  .close-modal-button {
+    @include position(absolute, $top: -27px, $left: 0);
+    z-index: 99;
+    svg {
+      @include text-format(20px, var(--white), $cursor: pointer);
+    }
+  }
+}
+.modal {
+  .product-detail-row {
+    margin: 0;
+  }
+  .product-row {
+    margin: 10px 0;
+  }
+  .product-description {
+    margin-top: 20px;
+  }
+  .product-actions {
+    margin: 25px 0;
+  }
+  .add-to-cart {
+    margin: 20px 0;
+  }
+  .category-info {
+    margin: 0;
+    .category-row {
+      padding: 10px 0;
+    }
+  }
+}
+@media screen and (max-width: 1200px) {
+  .modal {
+    padding: 0;
+    max-width: 90%;
+    max-height: 90%;
+    .swiper-slide img {
+      width: 100%;
+    }
+  }
+}
+
+@include device-breakpoint("tablet-size") {
+}
+@include device-breakpoint("tablet-portrait") {
+  .simple-modal {
+    min-width: 400px;
+  }
+  .product-actions .action-row {
+    gap: 0;
+    font-size: 16px;
+  }
+}

@@ -1,0 +1,31 @@
+.ArticleCard {
+  @include size(100%, 100%);
+  background-color: var(--white);
+  .ArticleImage > img {
+    width: 100%;
+  }
+}
+
+.ArticleBody {
+  padding: 20px;
+  line-height: 2;
+  .articleCategory > * {
+    @include text-format(12px, var(--steel-gray), $cursor: pointer);
+    margin-left: 5px;
+    &:hover {
+      color: var(--primary);
+    }
+  }
+}
+
+.ArticleBody {
+  .articleTitle > h3 {
+    @include text-format(22px, $fontFamilly: "Estedad-bold", $cursor: pointer);
+    &:hover {
+      color: var(--primary);
+    }
+  }
+  .articleDescription {
+    color: var(--steel-gray);
+  }
+}

@@ -1,0 +1,111 @@
+.register-wrapper {
+  padding: 0 20px;
+}
+
+.register-container {
+  max-width: 525px;
+  min-height: 500px;
+  margin: 60px auto;
+  border: 0.75px solid lightgray;
+  padding: 30px;
+  text-align: right;
+  box-shadow: 1px 0px 3px 0px gray;
+  form {
+    padding: 25px 0 10px;
+  }
+  .input-group {
+    padding: 7px 0;
+    input {
+      border: 0.75px solid lightgray;
+      border-radius: 0;
+    }
+  }
+}
+.register-container {
+  .form-header {
+    font-size: 17px;
+    @include flex($justify: center);
+  }
+
+  .register-tabpane-button {
+    width: 50%;
+    text-align: center;
+    border-bottom: 0.75px solid lightgray;
+    padding-bottom: 5px * 2;
+    position: relative;
+    cursor: pointer;
+
+    &.active {
+      border-bottom: 2.5px solid var(--primary);
+    }
+  }
+}
+.register-tabpane-button {
+  &.diactive {
+    color: var(--steel-gray);
+    &:after {
+      content: "";
+      @include position(absolute, $right: 50%, $left: 50%, $bottom: -1px);
+      background-color: var(--primary);
+      height: 2.5px;
+      transition: all 0.5s;
+      margin: 0 5px;
+    }
+    &:hover::after {
+      right: 0%;
+      left: 0%;
+    }
+  }
+}
+
+.register-container .checkbox-row {
+  margin-bottom: 20px;
+  @include flex($justify: space-between, $align: center);
+  .check-website-rules {
+    @include flex($gap: 5px);
+    padding: 10px 0;
+    #checkout-rules-checkbox {
+      accent-color: var(--midnight-black);
+    }
+  }
+  label,
+  .forget-password {
+    @include text-format(13px, var(--steel-gray));
+  }
+}
+.signin-with {
+  position: relative;
+  width: 100%;
+  margin: 30px 0;
+  text-align: center;
+  &::before {
+    content: "";
+    @include position(absolute, $top: 8px, $right: 0, $left: 0);
+    @include size(100%, 2px);
+    background: lightgray;
+    z-index: -10;
+  }
+  span {
+    @include text-format(13px, var(--steel-gray));
+    background: var(--white);
+    width: 70px;
+    display: block;
+    margin: auto;
+  }
+}
+.signin-icons-row {
+  @include grid($columns: repeat(3, 33px), $gap: 20px);
+  justify-content: center;
+  grid-auto-rows: 33px;
+  .icon-wrapper {
+    color: var(--white);
+    border-radius: 50%;
+    @include size(100%, 100%);
+    text-align: center;
+    @include flex($direction: column, $justify: center, $align: center);
+    cursor: pointer;
+  }
+  svg {
+    font-size: 20px;
+  }
+}

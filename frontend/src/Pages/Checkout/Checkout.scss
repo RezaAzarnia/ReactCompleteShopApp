@@ -1,0 +1,29 @@
+.chackeout-row {
+  @include flex($gap: 20px);
+  margin: 70px 0;
+  padding: 20px;
+}
+.checkout-form-wrapper {
+  flex: 4;
+  input,
+  textarea,
+  select {
+    border: 0.5px solid lightgray;
+    border-radius: 2px;
+  }
+}
+.input-row {
+  @include grid($columns: repeat(2, 1fr), $gap: 20px);
+}
+.form-row {
+  @include flex($direction: column);
+  gap: 25px;
+}
+
+
+
+@include device-breakpoint("phone-size") {
+  .input-row {
+    grid-template-columns: auto;
+  }
+}

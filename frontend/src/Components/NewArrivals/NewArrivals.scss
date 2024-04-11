@@ -1,0 +1,59 @@
+.newArriavalsWrapper {
+  @include grid($columns: repeat(2, 1fr), $gap: 10px);
+  justify-content: center;
+  padding: 90px 20px 40px;
+  .newArrival-item {
+    position: relative;
+    img {
+      width: 100%;
+    }
+  }
+}
+.newArrival-item {
+  .newArrivalText {
+    @include position(absolute, $top: 0, $right: 10%);
+    @include flex(column, center);
+    height: 100%;
+    line-height: 1.75;
+    h2 {
+      @include text-format(32px, $fontFamilly: "Pinar");
+    }
+    .text-primary {
+      color: var(--primary);
+    }
+    .text-white {
+      color: var(--white);
+    }
+  }
+}
+.newArrival-item {
+  .text-row {
+    @include flex($align: center);
+    @include text-format(17px, $fontFamilly: "Yekan");
+  }
+}
+@include device-breakpoint("tablet-size") {
+  .newArriavalsWrapper {
+    padding-top: 80px;
+    grid-template-columns: 1fr;
+    .newArrival-item {
+      padding: 0 10px;
+    }
+  }
+  .newArriavalsWrapper {
+    .newArrival-item .newArrivalText h2 {
+      font-size: 22px;
+    }
+    .text-row {
+      font-size: 15px;
+      margin-top: 15px;
+    }
+  }
+}
+@media screen and (max-width: 1023px) {
+  .newArriavalsWrapper {
+    .newArrival-item .newArrivalText h2 {
+      font-size: 26px;
+    }
+  }
+}

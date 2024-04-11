@@ -1,0 +1,126 @@
+.checkout-information-sidebar {
+  flex: 2.5;
+  background-color: #f6f6f6;
+  padding: 40px;
+  .checkout-row {
+    @include flex($justify: space-between);
+    padding: 25px 0;
+  }
+}
+.checkout-information-sidebar {
+  .checkout-card-title > h3 {
+    @include text-format(22px, $fontFamilly: "Pinar");
+  }
+  .checkout-total-price .total-price-row {
+    span {
+      @include text-format(18px, var(--midnight-black));
+    }
+  }
+}
+.checkout-information-sidebar .checkout-buy-list {
+  padding: 30px 0 20px;
+  .checkout-buy-list-item {
+    padding: 14px 0;
+    .buylist-title {
+      @include text-format(18px, var(--midnight-black));
+    }
+    .buy-list-items {
+      color: rgb(136, 136, 136);
+    }
+  }
+}
+.checkout-shipping-payment {
+  padding: 15px 0px 30px;
+  .ship-text {
+    line-height: 3;
+    @include text-format(22px, $fontFamilly: "Estedad-bold");
+  }
+  .ship-free {
+    color: rgb(136, 136, 136);
+  }
+}
+
+.checkout-payment-way {
+  margin: 14px 0;
+  h3 {
+    @include text-format(22px, $fontFamilly: "Estedad-bold");
+  }
+  .payment-methods {
+    padding: 35px 0 15px;
+    color: rgb(136, 136, 136);
+    .input-radio-row {
+      @include flex(row-reverse, start);
+      padding: 10px 0;
+    }
+  }
+}
+
+.checkout-payment-way {
+  input[type="radio"] {
+    -webkit-appearance: none;
+    @include size(1.15em, 1.15em);
+    display: grid;
+    appearance: none;
+    margin: 0;
+    font: inherit;
+    color: currentColor;
+    border: 0.15em solid currentColor;
+    border-radius: 50%;
+    transform: translateY(-0.075em);
+    place-content: center;
+    &::before {
+      content: "";
+      @include size(0.65em, 0.65em);
+      border-radius: 50%;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em var(--form-control-color);
+      background-color: CanvasText;
+    }
+  }
+  input[type="radio"]:checked::before {
+    transform: scale(1);
+  }
+  label {
+    color: var(--midnight-black);
+    margin-right: 5px;
+  }
+}
+
+.payment-collapse {
+  overflow: hidden;
+  height: 100%;
+  max-height: 0;
+  transition: all 0.4s ease;
+  &.show {
+    max-height: 160px;
+  }
+  .payment-info {
+    line-height: 1.8;
+    padding: 0 20px;
+    font-size: 15px;
+  }
+}
+.submit-checkout {
+  margin-top: 15px;
+  .check-website-rules {
+    @include flex($gap: 5px);
+    padding: 10px 0;
+    #checkout-rules-checkbox {
+      accent-color: var(--midnight-black);
+    }
+  }
+  .button-wrapper {
+    @extend .submit-checkout;
+  }
+}
+@include device-breakpoint("large-mobile") {
+  .checkout-information-sidebar {
+    padding: 15px;
+  }
+  .chackeout-row {
+    margin: 20px 0;
+    flex-direction: column;
+  }
+
+}

@@ -1,0 +1,10 @@
+.articlesWrapper {
+  padding: 40px 0;
+  margin-top: 40px;
+  background-color: var(--cloud-gray);
+}
+@include device-breakpoint("large-mobile") {
+  .articlesWrapper {
+    padding: 1px 20px 30px;
+  }
+}

@@ -1,0 +1,14 @@
+.bread-crump {
+  padding: 10px 0;
+  margin: 0 5px;
+  border-bottom: 0.75px solid lightgray;
+  .breadCrump-list {
+    @include flex($align: center , $gap:3px);
+    .breadcrump-item {
+      @include text-format(13px, var(--steel-gray));
+      &.diactive > a{
+        color: var(--steel-gray);
+      }
+    }
+  }
+}

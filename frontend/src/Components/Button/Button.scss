@@ -1,0 +1,75 @@
+.button-wrapper {
+  a {
+    display: block;
+    font-size: 13px;
+  }
+  button,
+  a {
+    width: 100%;
+    padding: 14px 15px;
+    border-radius: 3px;
+    @include text-format($fontFamilly: "Yekan", $cursor: pointer);
+    transition: all 0.2s ease-in-out;
+    text-align: center;
+    border: none;
+  }
+}
+button:disabled{
+  cursor: not-allowed;
+}
+.contained-button {
+  background-color: var(--charcoal);
+  color: var(--white);
+  &:hover {
+    background-color: var(--charcoal-hover);
+  }
+}
+
+.outline-button {
+  border: 1px solid var(--charcoal) !important;
+  background-color: transparent;
+  &:hover {
+    background-color: var(--midnight-black);
+    color: var(--white);
+  }
+}
+
+.error-button {
+  background-color: var(--vivid-red);
+  color: var(--white);
+  &:hover {
+    background-color: #a61f1f;
+  }
+}
+
+
+.button-loader {
+  width: 25px;
+  height: 24px;
+  border-radius: 50%;
+  margin: auto;
+  position: relative;
+  animation: rotate 1s linear infinite
+}
+
+.button-loader::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  inset: 0px;
+  border-radius: 50%;
+  border: 3px solid var(--alert);
+  animation: prixClipFix 2s linear infinite ;
+}
+
+@keyframes rotate {
+  100%   {transform: rotate(360deg)}
+}
+
+@keyframes prixClipFix {
+    0%   {clip-path:polygon(50% 50%,0 0,0 0,0 0,0 0,0 0)}
+    25%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 0,100% 0,100% 0)}
+    50%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,100% 100%,100% 100%)}
+    75%  {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 100%)}
+    100% {clip-path:polygon(50% 50%,0 0,100% 0,100% 100%,0 100%,0 0)}
+}

@@ -1,0 +1,9 @@
+.page-display-name {
+  background-color: #f8f4f1;
+  padding: 60px 0;
+  min-height: 150px;
+  text-align: center;
+  .page-title {
+    @include text-format(30px, $fontFamilly: "Pinar");
+  }
+}

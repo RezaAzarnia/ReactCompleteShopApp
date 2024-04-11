@@ -1,0 +1,35 @@
+.alert {
+  @include flex($align: center, $justify: center);
+  padding: 31px;
+  border: 1px solid green;
+  text-align: center;
+  margin: 50px 0;
+  min-height: 180px;
+  height: 100%;
+  line-height: 1.2;
+  h1 {
+    @include text-format(30px, $fontFamilly: "Estedad-bold");
+  }
+}
+
+table tr.receipt-table-row {
+  grid-template-columns: repeat(5, 1fr);
+  align-items: center;
+  justify-items: center;
+  border: none;
+  padding: 10px 0;
+}
+@include device-breakpoint("large-mobile") {
+  .receipt-container {
+    padding: 20px;
+    table {
+      border: 1px solid lightgray;
+      td {
+        text-align: left;
+        &::before {
+          float: right;
+        }
+      }
+    }
+  }
+}

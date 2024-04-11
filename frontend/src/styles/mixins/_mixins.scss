@@ -1,0 +1,76 @@
+// Define mixin for small screens
+@mixin size($width, $height: $width) {
+  width: $width;
+  height: $height;
+}
+
+@mixin box-shadow($x, $y, $blur, $spread: 0, $color: null) {
+  box-shadow: $x $y $blur $spread $color;
+}
+
+@mixin text-format(
+  $font-size: null,
+  $color: null,
+  $fontFamilly: null,
+  $cursor: null
+) {
+  font-size: $font-size;
+  color: $color;
+  font-family: $fontFamilly;
+  cursor: $cursor;
+}
+
+@mixin flex($direction: null, $justify: null, $align: null, $gap: null) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin grid($columns: null, $rows: null, $gap: null) {
+  display: grid;
+  grid-template-columns: $columns;
+  grid-template-rows: $rows;
+  gap: $gap;
+}
+@mixin position(
+  $position,
+  $top: null,
+  $right: null,
+  $bottom: null,
+  $left: null
+) {
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin fixed-center {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@mixin device-breakpoint($device) {
+  @if $device == "phone-size" {
+    @media (max-width: 600px) {
+      @content;
+    }
+  } @else if $device == "tablet-size" {
+    @media only screen and (max-width: 768px) {
+      @content;
+    }
+  } @else if $device == "large-mobile" {
+    @media only screen and (max-width: 990px) {
+      @content;
+    }
+  } @else if $device == "tablet-portrait" {
+    @media only screen and (min-width: 768px) and (max-width: 990px) {
+      @content;
+    }
+  }
+}

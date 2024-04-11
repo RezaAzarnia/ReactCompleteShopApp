@@ -1,0 +1,11 @@
+.swiper-slider {
+  .swiper-pagination {
+    position: unset;
+    padding-top: 30px;
+  }
+}
+.swiper-pagination-bullet-active {
+  @include size(20px, 8px);
+  background: var(--primary);
+  border-radius: 20px;
+}

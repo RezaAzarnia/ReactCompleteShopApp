@@ -1,0 +1,56 @@
+.modify-count-cart {
+  @include position(relative);
+  @include flex($align: center, $justify: center);
+  width: 95px;
+  margin: auto;
+  padding: 13px;
+  border: 1px solid lightgray;
+  border-radius: 3px;
+  button {
+    @include position(absolute);
+    @include text-format(25px, $cursor: pointer);
+    background: transparent;
+    border: none;
+  }
+}
+.modify-count-cart {
+  .decrease-button {
+    left: 8px;
+    color: var(--vivid-red);
+  }
+  .increase-button {
+    right: 8px;
+  }
+}
+/* HTML: <div class="loader"></div> */
+.quantity-loader {
+  display: flex;
+  justify-content: center;
+  flex-direction: row-reverse;
+
+  .dot {
+    width: 9px;
+    height: 9px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    animation: dot-flashing 1s infinite;
+  }
+}
+
+@keyframes dot-flashing {
+  0%,
+  50% {
+    opacity: 0.2;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.dot:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.dot:nth-child(3) {
+  animation-delay: 0.4s;
+}

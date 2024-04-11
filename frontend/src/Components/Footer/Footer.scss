@@ -1,0 +1,50 @@
+footer {
+  @include position(absolute, $right: 0, $left: 0, $bottom: 0);
+  background: #222222;
+  color: var(--white);
+  height: 100%;
+  max-height: 306px;
+  .footerWrapper {
+    padding: 50px 35px;
+    max-width: 1170px;
+  }
+}
+.footer-row {
+  @include grid($columns: repeat(4, 1fr), $gap: 20px);
+  justify-content: space-between;
+  justify-items: center;
+  line-height: 2;
+  .footer-title {
+    @include text-format(18px, var(--white), "Estedad-bold");
+  }
+  .footerLists {
+    @include flex(column, $align: flex-start, $gap: 10px);
+    margin-top: 20px;
+
+    .footerListItem {
+      font-size: 15px;
+      font-family: "Yekan";
+      color: var(--steel-gray);
+    }
+  }
+}
+
+@include device-breakpoint("tablet-size") {
+  footer {
+    position: unset;
+    max-height: unset;
+    bottom: unset;
+    height: auto;
+  }
+  .footer-row {
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: unset;
+    gap: 45px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .footer-row {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

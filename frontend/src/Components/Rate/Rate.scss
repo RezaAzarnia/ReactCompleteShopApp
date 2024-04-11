@@ -1,0 +1,7 @@
+.rate {
+  @include flex(row-reverse, $align: center);
+  color: var(--light-gray);
+  .fill {
+    color: var(--alert);
+  }
+}

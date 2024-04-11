@@ -1,0 +1,49 @@
+.customersFeedback {
+  padding: 30px 0;
+}
+.customer-feedback-row {
+  padding: 20px;
+}
+.CustomersFeedbackCard {
+  border-radius: 5px;
+  @include flex(column, space-between, $gap: 30px);
+  .customer-message-box {
+    position: relative;
+    &::after {
+      content: "";
+      @include size(0, 0);
+      @include position(absolute, $right: 10%);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 12px solid var(--cloud-gray);
+    }
+    .customer-message {
+      @include text-format($color: var(--steel-gray), $fontFamilly: "Yekan");
+      padding: 30px 20px;
+      line-height: 1.6;
+      background: var(--cloud-gray);
+    }
+  }
+}
+
+.customerFeedback-user-part {
+  @include flex($align: center);
+  gap: 10px;
+  .customer-avatar > img {
+    border-radius: 50%;
+  }
+  .customer-info {
+    line-height: 1.5;
+  }
+  .customer-name {
+    font-family: "Estedad-bold";
+  }
+  .customer-rate {
+    color: var(--primary);
+  }
+}
+@include device-breakpoint("large-mobile") {
+  .customer-feedback-row {
+    padding: 0 20px;
+  }
+}

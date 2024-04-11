@@ -1,0 +1,167 @@
+.loader-overlay {
+  @include position(fixed, $top: 0, $left: 0);
+  @include size(100%, 100%);
+  @include flex($align: center, $justify: center);
+  background-color: var(--white);
+  z-index: 9999;
+  h1 {
+    font-size: 90px;
+    text-align: center;
+  }
+}
+.alert {
+  padding: 24px 14px;
+  margin: 10px 0;
+  background-color: #f8d7da; // Light red background color
+  color: var(--dark-red); // Dark red text color
+  border: 1px solid #f5c6cb; // Border color
+  border-radius: 4px; // Rounded corners
+  text-transform: capitalize;
+}
+
+.in-Cart .modify-count-cart {
+  margin: unset;
+}
+
+.product-detail-tabpane {
+  margin-top: 30px;
+  .product-detail-tabpane-menu-list {
+    @include flex($justify: center, $gap: 60px);
+    padding: 20px 0;
+  }
+}
+.product-detail-tabpane-menu-list .product-detail-tabpane-list-item {
+  position: relative;
+  font-size: 18px;
+  font-weight: 600;
+  &.active::after {
+    content: "";
+    @include position(absolute, $right: 0, $bottom: -21px);
+    @include size(100%, 2px);
+    background-color: var(--luminous-vivid-orange);
+  }
+}
+.product-detail-tabpane-menu-list .product-detail-tabpane-list-item {
+  &.deactive {
+    color: var(--steel-gray);
+    &:after {
+      content: "";
+      @include position(absolute, $right: 50%, $left: 50%, $bottom: -21px);
+      background-color: var(--luminous-vivid-orange);
+      height: 2px;
+      transition: all 0.5s;
+    }
+    &:hover::after {
+      right: 0%;
+      left: 0%;
+    }
+  }
+}
+
+.product-extra-details-row {
+  @include flex($gap: 35px);
+  width: 100%;
+  padding: 20px;
+  .right-side,
+  .left-side {
+    width: 50%;
+  }
+  .left-side > img {
+    @include size(100%, 100%);
+  }
+
+  .extra-description-title,
+  .product-gradinat-title {
+    @include text-format(22px, $fontFamilly: "Estedad-bold");
+  }
+}
+.product-extra-details-row {
+  .extra-description-title {
+    padding-top: 0;
+  }
+  .ingradiant-list-item {
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .gradiant-row {
+    @include flex($align: center);
+    padding: 17px 0;
+  }
+  .gradinat-title {
+    width: 35%;
+  }
+}
+.product-infos {
+  .product-detail-text {
+    line-height: 2;
+    text-align: justify;
+    color: var(--steel-gray);
+    margin-top: 10px;
+  }
+}
+.product-ingradiant-infos {
+  margin-top: 30px;
+  .product-ingradiant-list {
+    margin-top: 10px;
+    .gradinat-info {
+      color: gray;
+      font-size: 14px;
+    }
+  }
+}
+.product-delevry-infos {
+  padding: 50px 20px;
+}
+.product-delever-row {
+  @include grid($columns: repeat(3, 1fr));
+  padding: 30px 0px;
+  background: #f9fafc;
+  justify-items: center;
+}
+.delevery-info {
+  line-height: 1.4;
+  text-align: right;
+  .delevery-info-top-part {
+    font-size: 12px;
+  }
+  .delevery-info-down-part {
+    @include text-format(18px, var(--charcoal), "Yekan");
+    text-align: center;
+  }
+}
+
+.suggestedProucts {
+  padding: 0 20px 60px;
+}
+
+@include device-breakpoint("tablet-size") {
+  .product-infos {
+    margin-top: 20px;
+  }
+  .product-detail-tabpane {
+    margin-top: 20px;
+    .product-detail-tabpane-menu-list {
+      padding: 20px;
+      border-bottom: 0.75px solid lightgray;
+    }
+  }
+  .product-detail-tabpane-menu {
+    padding: 0 20px;
+  }
+  .product-extra-details-row {
+    gap: 0;
+    flex-direction: column-reverse;
+    .right-side,
+    .left-side {
+      width: 100%;
+    }
+  }
+  .product-delevry-infos {
+    padding: 30px;
+  }
+  .product-delever-row {
+    grid-template-columns: auto;
+    grid-template-rows: repeat(3, 130px);
+    justify-items: center;
+    align-items: center;
+  }
+}

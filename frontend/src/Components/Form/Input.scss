@@ -1,0 +1,25 @@
+.input-group {
+  width: 100%;
+  input,
+  textarea,
+  select {
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: 100%;
+    outline: none;
+    @include text-format(15px, var(--charcoal-hover));
+    &::placeholder {
+      font-size: 15px;
+    }
+  }
+  label {
+    @include text-format(14px, rgb(136, 136, 136), "Iran Yekan");
+  }
+}
+
+.input-error-text {
+  @include text-format(13px, var(--vivid-red), "Yekan");
+  display: block;
+}

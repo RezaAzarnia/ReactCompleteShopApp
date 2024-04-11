@@ -1,0 +1,8 @@
+.topSalesWrapper {
+  padding: 60px 0;
+}
+@include device-breakpoint("large-mobile") {
+  .topSalesWrapper {
+    padding: 60px 20px 30px;
+  }
+}

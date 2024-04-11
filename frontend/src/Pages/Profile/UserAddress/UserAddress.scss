@@ -1,0 +1,38 @@
+.address-row {
+  @include flex;
+  gap: 20px;
+  .billing-address,
+  .shipping-address {
+    width: 50%;
+    h3 {
+      @include text-format(20px, $fontFamilly: "Yekan");
+      padding: 10px 0;
+    }
+  }
+}
+
+.address-list {
+  margin: 15px 0;
+  .address-list-item {
+    padding: 15px 0;
+    font-family: "Yekan";
+  }
+}
+.edit-address {
+  margin-top: 30px;
+  .edit-address-link {
+    @include text-format(18px, $fontFamilly: "Pinar");
+    &:hover {
+      border-bottom: 2px solid;
+    }
+  }
+}
+@include device-breakpoint("phonw-size") {
+  .address-row {
+    flex-direction: column;
+    .billing-address,
+    .shipping-address {
+      width: 100%;
+    }
+  }
+}

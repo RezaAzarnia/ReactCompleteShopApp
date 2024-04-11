@@ -1,0 +1,49 @@
+.TopProductsWrapper {
+  padding: 50px 0;
+}
+.tabPane-row {
+  @include grid($columns: repeat(6, 1fr));
+  grid-auto-rows: 150px;
+  border: 1px solid var(--light-gray);
+}
+.TopProductsCardsWrraper {
+  @include grid($columns: repeat(4, 1fr), $gap: 20px);
+  margin-top: 60px;
+  padding: 0 10px;
+}
+.seeAll-button {
+  margin: 60px auto 0;
+  width: 18%;
+  text-align: center;
+}
+.tabPane-row::-webkit-scrollbar {
+  height: 5px;
+}
+.tabPane-row::-webkit-scrollbar-track {
+  background: rgba(250, 118, 70, 0.1);
+}
+.tabPane-row::-webkit-scrollbar-thumb {
+  background: rgba(250, 118, 70, 0.612);
+}
+
+@include device-breakpoint("large-mobile") {
+  .TopProductsWrapper {
+    padding: 50px 10px;
+  }
+  .tabPane-row {
+    grid-auto-rows: 120px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+  }
+  .TopProductsCardsWrraper {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .seeAll-button {
+    width: 30%;
+  }
+}
+@include device-breakpoint("tablet-size") {
+  .TopProductsCardsWrraper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

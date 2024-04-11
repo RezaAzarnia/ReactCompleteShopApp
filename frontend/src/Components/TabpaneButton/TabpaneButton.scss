@@ -1,0 +1,56 @@
+.tabpane-button {
+  @include size(100%, 100%);
+  @include flex(column, center, center);
+  @include position(relative);
+  min-width: 135px;
+  text-align: center;
+  cursor: pointer;
+  .tabpane-icon {
+    @include size(80px, 80px);
+    margin-bottom: 5px;
+  }
+}
+
+.tabpane-button {
+  &.active {
+    background-color: var(--primary);
+    color: var(--white);
+    animation: fade 0.3s ease;
+    .tabpane-icon path {
+      fill: var(--white); /* Change fill color to white */
+    }
+    &::after {
+      content: "";
+      @include position(absolute, $bottom: -12px);
+      @include size(0, 0);
+      border-left: 8px solid transparent;
+      border-right: 8px solid transparent;
+      border-top: 12px solid var(--primary);
+    }
+  }
+  &:hover {
+    .tabpane-icon path {
+      fill: var(--white); /* Change fill color to white */
+    }
+    @extend .active;
+  }
+}
+
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@include device-breakpoint("large-mobile") {
+  .tabpane-button {
+    .tabpane-icon {
+      height: 60px;
+    }
+    .tabpane-title {
+      font-size: 15px;
+    }
+  }
+}
