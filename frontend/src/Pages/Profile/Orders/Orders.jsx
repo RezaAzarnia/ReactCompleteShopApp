@@ -7,8 +7,13 @@ import './Orders.scss'
 const Orders = ({ userInfo }) => {
   const [userOrders, setUserOrders] = useState([])
   const getOrders = async () => {
-    const response = await getUserOrders(userInfo.id)
-    setUserOrders(response)
+    try {
+      const response = await getUserOrders(userInfo.id)
+      setUserOrders(response)
+      console.log(response.length);
+    } catch (error) {
+      console.log(error);
+    }
   }
   useEffect(() => {
     getOrders()
@@ -17,7 +22,7 @@ const Orders = ({ userInfo }) => {
   return (
     <div className='ordersWrapper'>
       {
-        userOrders ? (
+        userOrders.length != 0 ? (
           <Table>
             <thead>
               <tr className='orders-table-row'>
@@ -46,7 +51,7 @@ const Orders = ({ userInfo }) => {
           </Table>
         )
           : (
-            <span>سفارشی وجود ندارد</span>
+            <div className='error-alert'>سفارشی وجود ندارد</div>
           )
       }
     </div>

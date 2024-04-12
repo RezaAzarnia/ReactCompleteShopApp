@@ -59,11 +59,13 @@ const Product = () => {
     useEffect(() => {
         const filter = products.filter(item => item.category === productInfo?.category)
         setSameCategory(filter.slice(0, 4))
-        
+
     }, [productInfo])
 
     if (error) {
-        return <h1 className='alert'>{error}</h1>
+        return <div className="container" style={{padding:'20px'}}>
+            <h1 className='error-alert'>{error}</h1>
+        </div>
     }
 
     return (

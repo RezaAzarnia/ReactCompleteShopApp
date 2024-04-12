@@ -6,13 +6,24 @@ import './UserOrderDetail.scss'
 const UserOrderDetail = () => {
     const { orderId } = useParams()
     const [userOrderInfo, setUserOrderInfo] = useState({})
+    const [error, setError] = useState('')
     const getOrderInfo = async () => {
-        const response = await getOrderDetail(orderId)
-        setUserOrderInfo(response);
+        try {
+            const response = await getOrderDetail(orderId)
+            setUserOrderInfo(response);
+        } catch (error) {
+            setError(error)
+        }
     }
     useEffect(() => {
         getOrderInfo()
     }, [orderId])
+
+    if (error) {
+        return <div className="container">
+            <div className="error-alert">{error}</div>
+        </div>
+    }
     return (
         <div>
             <OrderReceit orderInfo={userOrderInfo} />
