@@ -1,5 +1,3 @@
-.product-detail-wrapper {
-}
 .product-detail-row {
   @include flex($gap: 10px);
   width: 100%;
@@ -65,6 +63,8 @@
     font-size: 18px;
     font-family: "Yekan";
   }
+}
+.add-to-cart {
   .addCartButton {
     @include flex($justify: center, $align: center, $gap: 5px);
     @include text-format(18px, var(--white), "Yekan", pointer);
@@ -74,6 +74,12 @@
     .bag-icon {
       font-size: 20px;
     }
+    &:disabled{
+      cursor: not-allowed;
+    }
+  }
+  .button-loader::before {
+    border-color: var(--white);
   }
 }
 .in-Cart {
@@ -177,5 +183,10 @@
     .product-picture {
       width: 100%;
     }
+  }
+}
+@include device-breakpoint("phone-size") {
+  .product-actions {
+    flex-direction: column;
   }
 }

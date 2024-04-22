@@ -1,6 +1,6 @@
 import axios from "axios";
 const baseURL = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://alpusshopdatabase.liara.run/",
   headers: {
     "Content-Type": "application/json",
   },

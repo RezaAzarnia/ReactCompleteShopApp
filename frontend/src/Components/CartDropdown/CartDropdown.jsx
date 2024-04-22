@@ -6,10 +6,30 @@ import { selectCartTotalPrice, selectUserCartLength } from '../../Redux/slices/c
 import QuantityModifier from '../QuantityModifier/QuantityModifier'
 import Button from '../Button/Button'
 import './CartDropdown.scss'
+
 const CartDropdown = () => {
     const cartLength = useSelector(selectUserCartLength)
     const cartItems = useSelector(state => state.cart.userCart)
     const cartTotalPrice = useSelector(selectCartTotalPrice)
+    
+    const renderCartItems = () => {
+        return cartItems.map(item => (
+            <div className="cart-item" key={item.id}>
+                <div className="cart-row">
+                    <div className="cart-picture">
+                        <img src={item.productCover} alt="" />
+                    </div>
+                    <div className="cart-product-title">
+                        <h3>{item.productName}</h3>
+                        <div className="cart-product-price">
+                            <h3>{item.price.toLocaleString('fa-IR')}</h3>
+                        </div>
+                    </div>
+                    <QuantityModifier quantity={item.quantity} productId={item.id} />
+                </div>
+            </div>
+        ));
+    };
 
     return (
         <div className='cartWrapper'>
@@ -23,24 +43,7 @@ const CartDropdown = () => {
                                 </div>
                             </div>
                             <div className="cart-list">
-                                {
-                                    cartItems?.map(item => {
-                                        return <div className="cart-item" key={item.id}>
-                                            <div className="cart-row">
-                                                <div className="cart-picture">
-                                                    <img src={item.productCover} alt="" />
-                                                </div>
-                                                <div className="cart-product-title">
-                                                    <h3>{item.productName}</h3>
-                                                    <div className="cart-product-price">
-                                                        <h3>{item.price.toLocaleString('fa-IR')}</h3>
-                                                    </div>
-                                                </div>
-                                                <QuantityModifier quantity={item.quantity} productId={item.id} />
-                                            </div>
-                                        </div>
-                                    })
-                                }
+                                {renderCartItems()}
                                 <div className="border-line"></div>
                             </div>
                             <div className="cart-totalPrice">

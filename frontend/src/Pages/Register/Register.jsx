@@ -58,7 +58,6 @@ const Register = ({ isUserLogin }) => {
       <PageTitle title="ورود/ثبت نام" />
       <div className="container">
         <BreadCrump activePage='ثبت نام' />
-        <div className="register-wrapper">
           <div className="register-container">
             <div className="form-box">
               <div className="form-header">
@@ -124,7 +123,6 @@ const Register = ({ isUserLogin }) => {
             </div>
           </div>
         </div>
-      </div>
     </>
   )
 }

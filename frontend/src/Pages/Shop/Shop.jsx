@@ -6,15 +6,18 @@ import FilterSidebar from '../../Components/FilterSidebar/FilterSidebar'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom';
 import { AiOutlineBars } from "react-icons/ai";
-
-import './Shop.scss'
 import NotFoundIcon from '../../Icons/NotFoundIcon';
+import usePagination from '../../hooks/usePagination';
+import { FaArrowLeftLong } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
+import './Shop.scss'
+
 const Shop = () => {
     const { searchValue } = useParams()
     const allProducts = useSelector(state => state.products.products)
     const [products, setProducts] = useState([])
     const [isOpenFilterSidebar, setIsOpenFilterSidebar] = useState(false)
-
+    const limit = 6;
     useEffect(() => {
         if (searchValue == 'all' || searchValue == undefined) {
             setProducts(allProducts)
@@ -26,53 +29,67 @@ const Shop = () => {
         }
     }, [searchValue, allProducts])
 
-
+    const { isDisableNextBtn, isDisableprevBtn, page, paginatedArray, nextPage, prevPage } = usePagination(products, limit)
 
     return (
         <>
             {
                 products.length > 0 ?
-                    <div className='shop'>
+                    <>
                         <PageTitle title="فروشگاه" />
-                        <div className="container">
+                        <div className="shop container">
                             <BreadCrump activePage="فروشگاه" />
                             <div className="shop-row">
-                                <FilterSidebar products={products} setProducts={setProducts} isOpenFilterSidebar={isOpenFilterSidebar} onClose={() => setIsOpenFilterSidebar(false)} />
+                                <FilterSidebar
+                                    products={products}
+                                    setProducts={setProducts}
+                                    isOpenFilterSidebar={isOpenFilterSidebar}
+                                    onClose={() => setIsOpenFilterSidebar(false)}
+                                />
                                 <div className="products-cards-wrapper">
-                                    <div className="filter-sidebar-button" onClick={() => setIsOpenFilterSidebar(true)}>
-
-                                        <AiOutlineBars />
-
-                                        <span className='show-md'>
-                                            فیلترها
-                                        </span>
-                                    </div>
+                                    {/* show in small screen */}
+                                    <FilterSidebarBtn setIsOpenFilterSidebar={setIsOpenFilterSidebar}/>
                                     <div className="products-cards-row">
-
-                                        {
-                                            products.map(item => {
-
-                                                return <ProductCard {...item} key={item.id} />
-                                            })
-                                        }
+                                        {paginatedArray?.map(item => <ProductCard {...item} key={item.id} />)}
                                     </div>
+                                    {Math.max(products?.length / limit) > 1 &&
+                                        <div className="pagination-row">
+                                            <button onClick={() => prevPage()} disabled={isDisableprevBtn}>
+                                                <FaArrowRightLong />
+                                            </button>
+                                            <span>{page}</span>
+                                            <button onClick={() => nextPage()} disabled={isDisableNextBtn}>
+                                                <FaArrowLeftLong />
+                                            </button>
+                                        </div>
+                                    }
                                 </div>
                             </div>
-                        </div>
-                    </div> : (
-                        (
-                            <div className="not-found">
-                                <NotFoundIcon />
-                                <p>کالایی با این مشخصات پیدا نکردیم پیشنهاد میکنیم فیلتر ها را تغغیر دهید</p>
-                            </div>
 
-                        )
-                    )
+                        </div>
+                    </>
+
+                    : <NotFoundMessage />
             }
         </>
     )
 }
+const FilterSidebarBtn = ({setIsOpenFilterSidebar}) => {
+    return (
+        <div className="filter-sidebar-button" onClick={() => setIsOpenFilterSidebar(true)}>
+            <AiOutlineBars />
+            <span className='show-md'>
+                فیلترها
+            </span>
+        </div>
+    )
+}
 
-
-
+const NotFoundMessage = () => {
+    return (<div className="not-found">
+        <NotFoundIcon />
+        <p>کالایی با این مشخصات پیدا نکردیم پیشنهاد میکنیم فیلتر ها را تغغیر دهید</p>
+    </div>
+    )
+}
 export default Shop;

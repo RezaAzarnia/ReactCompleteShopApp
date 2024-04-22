@@ -1,26 +1,24 @@
 .topFoodSaler {
-  padding: 30px 20px;
-  .topSalerPicture {
-    @include size(100%, 260px);
-    @include position(relative);
-    background: url(../public/burger.jpg);
-    background-repeat: no-repeat;
-    background-position: right;
+  position: relative;
+  @include size(100%, 260px);
+  img {
+    width: 100%;
+    height: 100%;
   }
 }
-.topFoodSaler {
-  .topSalerInfo {
-    @include position(absolute, $top: 0, $left: 0, $right: 0);
-    @include size(100%, 100%);
-    @include grid($columns: repeat(4, 1fr));
-    justify-items: center;
-    align-items: center;
-  }
+
+.topFoodSaler .topSalerInfo {
+  @include position(absolute, $top: 0, $left: 0, $right: 0);
+  @include size(100%, 100%);
+  @include grid($columns: repeat(4, 1fr));
+  justify-items: center;
+  align-items: center;
 }
+
 .topSalerInfo .info-right-side {
   line-height: 1.5;
   grid-column: 1 / 3;
-  .top-saler-top-title > span {
+  .top-saler-top-title {
     @include text-format(
       $color: var(--steel-gray),
       $fontFamilly: "Estedad-bold"
@@ -48,11 +46,6 @@
 }
 @include device-breakpoint("phone-size") {
   .topFoodSaler {
-    .topSalerPicture {
-      background-position: left;
-      background-repeat: repeat;
-      height: 300px;
-    }
     .topSalerInfo {
       grid-template-rows: max-content;
       grid-template-columns: auto;
@@ -68,15 +61,7 @@
   }
 }
 @include device-breakpoint("tablet-size") {
-  .topFoodSaler .topSalerInfo {
-    .info-right-side {
-      .top-info-title > h2 {
-        font-size: 28px;
-      }
-    }
-
-    .info-left-side > h2 {
-      font-size: 23px;
-    }
+  .topFoodSaler .topSalerInfo h2 {
+    font-size: 24px !important;
   }
 }

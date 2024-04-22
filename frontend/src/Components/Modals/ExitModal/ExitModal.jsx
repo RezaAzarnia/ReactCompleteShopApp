@@ -1,16 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import ReactDOM from 'react-dom';
 import Button from '../../Button/Button';
-import './ConfirmModal.scss'
+import { handleLogout } from '../../../Redux/slices/userSlice';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import './ExitModal.scss'
 
 
-export default function ConfirmModal({ action, isOpen, onCancel, onConfirm, isLoading }) {
+const ExitModal = ({ isOpen, onCancel }) => {
+    const [isLoading, setIsLoading] = useState(false)
 
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const logout = () => {
+        setIsLoading(true)
+        dispatch(handleLogout())
+        setIsLoading(false)
+        navigate('/')
+    }
     return ReactDOM.createPortal(
         <>
             <div className='overlay active' onClick={() => !isLoading && onCancel()}></div>
-            <div className={`modal confirm-modal ${isOpen ? 'active' : ''}`}>
-                <div className={`modal-header  ${action}`}>
+            <div className={`modal exit-modal ${isOpen ? 'active' : ''}`}>
+                <div className='modal-header'>
                     <div className="text-part">
                         <h2>از حساب کاربری خود خارج می‌شوید ؟</h2>
                     </div>
@@ -24,9 +36,9 @@ export default function ConfirmModal({ action, isOpen, onCancel, onConfirm, isLo
                         با خروج از حساب کاربری، به سبد خرید فعلی‌تان دسترسی نخواهید داشت.هروقت بخواهید می‌توانید مجددا وارد شوید و خریدتان را ادامه دهید.
                     </span>
                 </div>
-                <div className="confirm-modal-button">
+                <div className="exit-modal-button">
                     <Button title="انصراف" onClick={onCancel} variant='outlined' />
-                    <Button title="خروج از حساب " onClick={onConfirm} variant='error' />
+                    <Button title="خروج از حساب " onClick={logout} variant='error' isLoading={isLoading} />
                 </div>
             </div>
         </>
@@ -35,3 +47,4 @@ export default function ConfirmModal({ action, isOpen, onCancel, onConfirm, isLo
     )
 
 }
+export default ExitModal;

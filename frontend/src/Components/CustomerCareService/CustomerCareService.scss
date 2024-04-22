@@ -1,9 +1,9 @@
-.customerCareServiceWrapper {
+.customer-care-service-wrapper {
   padding: 55px 0;
   border-bottom: 0.75px solid lightgray;
 }
 
-.careCardWrapper > .care-card {
+.care-card-wrapper > .care-card {
   @include flex($justify: center, $align: center, $gap: 20px);
   padding: 10px 0;
   .card-logo {
@@ -42,20 +42,18 @@
     scale: 1;
   }
 }
-.care-card {
-  .card-body {
-    line-height: 1.3;
-    span {
-      color: var(--steel-gray);
-    }
-    .card-title {
-      @include text-format(25px, $fontFamilly: "Estedad-bold");
-    }
+.care-card .card-body {
+  line-height: 1.3;
+  .card-description {
+    color: var(--steel-gray);
+  }
+  .card-title {
+    @include text-format(25px, $fontFamilly: "Estedad-bold");
   }
 }
 
 @include device-breakpoint("large-mobile") {
-  .customerCareServiceWrapper {
+  .customer-care-service-wrapper {
     padding: 40px 0;
   }
 }

@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllProducts } from './Redux/slices/productsSlice'
 import { clearWishlist, getWishListItems } from './Redux/slices/wishListSlice'
 import { clearCart, getUserCart } from './Redux/slices/cartSlice'
+import ScrollToTopOnNavigation from './Components/ScrollToTopOnNavigation/ScrollToTopOnNavigation.jsx';
 import routes from './routes/routes'
 import './App.scss'
 
@@ -15,7 +16,7 @@ function App() {
   useEffect(() => {
     dispatch(fetchAllProducts())
   }, [dispatch])
-
+  //get user Cart and wishlist if user logged in 
   useEffect(() => {
     if (userInfo !== null) {
       dispatch(getWishListItems(userInfo.id))
@@ -30,7 +31,9 @@ function App() {
   return (
     <>
       <ToastContainer rtl />
-      <RouterProvider router={routes} />
+      <RouterProvider router={routes}>
+        <ScrollToTopOnNavigation />
+      </RouterProvider>
     </>
   )
 }

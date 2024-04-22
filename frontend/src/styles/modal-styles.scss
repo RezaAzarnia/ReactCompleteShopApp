@@ -8,12 +8,12 @@
     animation: fade 0.5s forwards;
     .closeIcon {
       position: absolute;
-      top: 30px;
-      left: 30px;
+      top: 10px;
+      left: 10px;
       color: var(--white);
       cursor: pointer;
       z-index: 10;
-      font-size: 30px;
+      font-size: 25px;
     }
   }
 }

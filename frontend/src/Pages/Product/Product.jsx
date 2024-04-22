@@ -11,15 +11,8 @@ import { fetchProductInfo } from '../../Redux/slices/productsSlice'
 import Slider from '../../Components/Slider/Slider'
 import './product.scss';
 
-const Product = () => {
 
-    const dispatch = useDispatch()
-    const { productId } = useParams()
-    const error = useSelector(state => state.products.error)
-    const isLoading = useSelector(state => state.products.loading)
-    const productInfo = useSelector(state => state.products.productInfo[0])
-    const products = useSelector(state => state.products.products)
-    const [sameCategory, setSameCategory] = useState([])
+const ProductDetailDescription = ({ description }) => {
     const ingredients = [
         {
             title: 'مواد : ',
@@ -40,18 +33,87 @@ const Product = () => {
     ];
     const deliveryInfos = [
         {
-            topPart: 'ارسال رایگان برای سفارش های بالای 100 تومان',
-            downPart: 'ارسال رایگان و ضمانت عودت محصول'
+            mainInfo: 'ارسال رایگان برای سفارش های بالای 100 تومان',
+            subInfo: 'ارسال رایگان و ضمانت عودت محصول'
         },
         {
-            topPart: 'دسترسی فوری به پشتیبانی کامل',
-            downPart: 'پشتیبانی مشتری 24/7'
+            mainInfo: 'دسترسی فوری به پشتیبانی کامل',
+            subInfo: 'پشتیبانی مشتری 24/7'
         },
         {
-            topPart: 'ما پرداخت مطمئن را تضمین می کنیم!',
-            downPart: 'پرداخت 100% مطمئن'
+            mainInfo: 'ما پرداخت مطمئن را تضمین می کنیم!',
+            subInfo: 'پرداخت 100% مطمئن'
         }
     ]
+    return (
+        <div className="container">
+            <div className="product-detail-tabpane">
+                <div className="product-detail-tabpane-menu">
+                    <ul className='product-detail-tabpane-menu-list'>
+                        <li className='product-detail-tabpane-list-item active'>
+                            توضیحات
+                        </li>
+                        <li className='product-detail-tabpane-list-item deactive'>
+                            نظرات مشتریان (1)
+                        </li>
+                    </ul>
+                    <div className="border-line"></div>
+                </div>
+            </div>
+            <div className="product-extra-details-row">
+                <div className="right-side">
+                    <div className="product-infos">
+                        <h1 className='extra-description-title'>
+                            توضیحات
+                        </h1>
+                        <p className='product-detail-text'>{description}</p>
+                    </div>
+                    <div className="product-ingradiant-infos">
+                        <h1 className='product-gradinat-title'>
+                            مواد تشکیل دهنده
+                        </h1>
+                        <ul className='product-ingradiant-list'>
+                            {ingredients.map((ingredient, index) => (
+                                <li key={index + 1} className='ingradiant-list-item'>
+                                    <div className="gradiant-row">
+                                        <span className='gradinat-title'>{ingredient.title}</span>
+                                        <span className='gradinat-info'>{ingredient.info}</span>
+                                    </div>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
+                <div className="left-side">
+                    <img src="/public/description-image.jpg" alt="" />
+                </div>
+            </div>
+            <div className="product-delevry-infos">
+                <div className="product-delever-row">
+                    {deliveryInfos.map((info, index) => (
+                        <div key={index + 1} className="delevery-info">
+                            <span className="delevery-info-top-part">{info.mainInfo}</span>
+                            <h3 className="delevery-info-down-part">{info.subInfo}</h3>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </div>
+    )
+}
+
+
+
+const Product = () => {
+
+    const dispatch = useDispatch()
+    const { productId } = useParams()
+    const error = useSelector(state => state.products.error)
+    const isLoading = useSelector(state => state.products.loading)
+    const productInfo = useSelector(state => state.products.productInfo[0])
+    const products = useSelector(state => state.products.products)
+    const [sameCategory, setSameCategory] = useState([])
+
     useEffect(() => {
         dispatch(fetchProductInfo(productId))
     }, [productId])
@@ -63,7 +125,7 @@ const Product = () => {
     }, [productInfo])
 
     if (error) {
-        return <div className="container" style={{padding:'20px'}}>
+        return <div className="container" style={{ padding: '20px' }}>
             <h1 className='error-alert'>{error}</h1>
         </div>
     }
@@ -84,64 +146,12 @@ const Product = () => {
                     <ProductDetail {...productInfo} slideMode={true} />
                 </div>
             </div>
-            <div className="container">
-                <div className="product-detail-tabpane">
-                    <div className="product-detail-tabpane-menu">
-                        <ul className='product-detail-tabpane-menu-list'>
-                            <li className='product-detail-tabpane-list-item active'>
-                                توضیحات
-                            </li>
-                            <li className='product-detail-tabpane-list-item deactive'>
-                                نظرات مشتریان (1)
-                            </li>
-                        </ul>
-                        <div className="border-line"></div>
-                    </div>
-                </div>
-                <div className="product-extra-details-row">
-                    <div className="right-side">
-                        <div className="product-infos">
-                            <h1 className='extra-description-title'>
-                                توضیحات
-                            </h1>
-                            <p className='product-detail-text'>{productInfo?.description}</p>
-                        </div>
-                        <div className="product-ingradiant-infos">
-                            <h1 className='product-gradinat-title'>
-                                مواد تشکیل دهنده
-                            </h1>
-                            <ul className='product-ingradiant-list'>
-                                {ingredients.map((ingredient, index) => (
-                                    <li key={index + 1} className='ingradiant-list-item'>
-                                        <div className="gradiant-row">
-                                            <span className='gradinat-title'>{ingredient.title}</span>
-                                            <span className='gradinat-info'>{ingredient.info}</span>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                    <div className="left-side">
-                        <img src="/public/description-image.jpg" alt="" />
-                    </div>
-                </div>
-                <div className="product-delevry-infos">
-                    <div className="product-delever-row">
-                        {deliveryInfos.map((info, index) => (
-                            <div key={index + 1} className="delevery-info">
-                                <span className="delevery-info-top-part">{info.topPart}</span>
-                                <h3 className="delevery-info-down-part">{info.downPart}</h3>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </div>
+
 
             <div className="suggestedProucts">
                 <SectionHeader title="محصولات مرتبط" />
+                <ProductDetailDescription description={productInfo?.description} />
                 <div className="container">
-
                     <Slider
                         Array={sameCategory}
                         Card={ProductCard}
@@ -159,6 +169,5 @@ const Product = () => {
         </>
     )
 }
-
 
 export default Product

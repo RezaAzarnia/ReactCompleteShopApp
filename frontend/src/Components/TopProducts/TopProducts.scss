@@ -39,11 +39,12 @@
     grid-template-columns: repeat(3, 1fr);
   }
   .seeAll-button {
-    width: 30%;
+    width: 35%;
   }
 }
 @include device-breakpoint("tablet-size") {
   .TopProductsCardsWrraper {
     grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 }

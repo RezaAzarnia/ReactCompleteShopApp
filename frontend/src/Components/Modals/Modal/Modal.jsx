@@ -1,8 +1,8 @@
 import React from 'react'
 import ReactDOM from 'react-dom';
 import ProductDetail from '../../ProductDetail/ProductDetail';
-import './Modal.scss'
 import { TfiClose } from 'react-icons/tfi';
+import './Modal.scss'
 
 
 const Modal = ({ isOpen, setIsOpen, productName, price, productImage, id, description, category }) => {

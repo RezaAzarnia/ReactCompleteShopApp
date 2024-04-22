@@ -1,36 +1,33 @@
 .modify-count-cart {
-  @include position(relative);
-  @include flex($align: center, $justify: center);
+  position: relative;
+  @include flex(
+    $direction: row-reverse,
+    $justify: space-between,
+    $align: center
+  );
   width: 95px;
-  margin: auto;
-  padding: 13px;
-  border: 1px solid lightgray;
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1px solid var(--light-gray);
   border-radius: 3px;
+
   button {
-    @include position(absolute);
-    @include text-format(25px, $cursor: pointer);
+    display: flex;
     background: transparent;
     border: none;
+    cursor: pointer;
   }
 }
 .modify-count-cart {
   .decrease-button {
-    left: 8px;
     color: var(--vivid-red);
   }
-  .increase-button {
-    right: 8px;
-  }
 }
-/* HTML: <div class="loader"></div> */
-.quantity-loader {
-  display: flex;
-  justify-content: center;
-  flex-direction: row-reverse;
 
+.quantity-loader {
+  @include flex($direction: row-reverse, $justify: center);
   .dot {
-    width: 9px;
-    height: 9px;
+    @include size(9px, 9px);
     background-color: var(--primary);
     border-radius: 50%;
     animation: dot-flashing 1s infinite;

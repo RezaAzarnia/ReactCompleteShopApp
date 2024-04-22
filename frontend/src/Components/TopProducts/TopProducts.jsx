@@ -46,13 +46,16 @@ const TopProducts = () => {
         setActiveCategory(categories[0]);
     }, [categories]);
 
-    const CreateTabPaneButtons = useCallback(() => {
+    const handleTabClick = useCallback((category) => {
+        setActiveCategory(category)
+    }, [])
+    const renderTabPaneButtons = useCallback(() => {
         return categories.map((category, index) => {
             return <TabpaneButton
                 title={category.title}
                 icon={category.icon && category.icon}
                 key={index + 1}
-                onClick={() => setActiveCategory(category)}
+                onClick={() => handleTabClick(category)}
                 active={category.title === activeCategory.title}
             />
         })
@@ -65,20 +68,20 @@ const TopProducts = () => {
                         <SectionHeader title="محصولات برتر" />
                         <div className="tabpane-wrapper">
                             <div className="tabPane-row">
-                                <CreateTabPaneButtons />
+                                {renderTabPaneButtons()}
                             </div>
                         </div>
                         {filteredProducts.length > 0 && (
-                            <div className="TopProductsCardsWrraper">
-                                {filteredProducts.slice(0, 4).map(product => (
-                                    <ProductCard {...product} key={product.id} />
-                                ))}
-                            </div>
-                        )}
-                        {filteredProducts.length > 4 && (
-                            <div className="seeAll-button">
-                                <Button to={`/shop/${filteredProducts[0].category}`} title='مشاهده همه' />
-                            </div>
+                            <>
+                                <div className="TopProductsCardsWrraper">
+                                    {filteredProducts.slice(0, 4).map(product => (
+                                        <ProductCard {...product} key={product.id} />
+                                    ))}
+                                </div>
+                                <div className="seeAll-button">
+                                    <Button to={`/shop/${filteredProducts[0].category}`} title='مشاهده همه' />
+                                </div>
+                            </>
                         )}
                     </div>
                 </div>

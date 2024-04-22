@@ -1,7 +1,7 @@
 .newArriavalsWrapper {
   @include grid($columns: repeat(2, 1fr), $gap: 10px);
   justify-content: center;
-  padding: 90px 20px 40px;
+  padding-top: 80px;
   .newArrival-item {
     position: relative;
     img {
@@ -26,6 +26,12 @@
     }
   }
 }
+.newArrival-picture {
+  height: 100%;
+  img {
+    height: 100%;
+  }
+}
 .newArrival-item {
   .text-row {
     @include flex($align: center);
@@ -34,8 +40,8 @@
 }
 @include device-breakpoint("tablet-size") {
   .newArriavalsWrapper {
-    padding-top: 80px;
     grid-template-columns: 1fr;
+    grid-auto-rows: 270px;
     .newArrival-item {
       padding: 0 10px;
     }

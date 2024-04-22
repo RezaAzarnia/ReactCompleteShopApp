@@ -7,15 +7,15 @@ const UserOrderDetail = () => {
     const { orderId } = useParams()
     const [userOrderInfo, setUserOrderInfo] = useState({})
     const [error, setError] = useState('')
-    const getOrderInfo = async () => {
-        try {
-            const response = await getOrderDetail(orderId)
-            setUserOrderInfo(response);
-        } catch (error) {
-            setError(error)
-        }
-    }
     useEffect(() => {
+        const getOrderInfo = async () => {
+            try {
+                const response = await getOrderDetail(orderId)
+                setUserOrderInfo(response);
+            } catch (error) {
+                setError(error)
+            }
+        }
         getOrderInfo()
     }, [orderId])
 

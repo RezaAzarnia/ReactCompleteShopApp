@@ -5,8 +5,6 @@ import SearchInput from '../SearchInput/SearchInput';
 import "./SubMenu.scss"
 
 const SubMenu = ({ isShowSliderMenu, closeSidebar }) => {
-  const [isActiveFixMenu, setIsActiveFixMenu] = useState(false)
-
   const links = [
     { text: 'خانه', url: '/' },
     { text: 'فروشگاه', url: '/shop' },
@@ -14,28 +12,30 @@ const SubMenu = ({ isShowSliderMenu, closeSidebar }) => {
     { text: 'وبلاگ' },
     { text: 'تماس با ما' }
   ];
-  const handleActiveFixMenu = () => {
-    if (Math.floor(window.scrollY >= 300 && window.innerWidth > 990)) {
-      setIsActiveFixMenu(true)
-      return
-    }
-    setIsActiveFixMenu(false)
-  }
+  const [isActiveFixMenu, setIsActiveFixMenu] = useState(false)
 
-  const closeSidebarInBigScreen = () => {
-    if (window.innerWidth > 990 && isShowSliderMenu) {
-      closeSidebar()
-    }
-  }
-
+  // Effect to handle submenu fixing based on scroll position
   useEffect(() => {
+    const handleActiveFixMenu = () => {
+      if (Math.floor(window.scrollY >= 300 && window.innerWidth > 990)) {
+        setIsActiveFixMenu(true)
+        return
+      }
+      setIsActiveFixMenu(false)
+    }
     window.addEventListener('scroll', handleActiveFixMenu)
     return () => {
       window.removeEventListener('scroll', handleActiveFixMenu)
     }
   }, [])
 
+  // Effect to close sidebar on big screens when the slider menu is shown
   useEffect(() => {
+    const closeSidebarInBigScreen = () => {
+      if (window.innerWidth > 990 && isShowSliderMenu) {
+        closeSidebar()
+      }
+    }
     window.addEventListener('resize', closeSidebarInBigScreen)
     return () => {
       window.removeEventListener('resize', closeSidebarInBigScreen)
@@ -51,7 +51,7 @@ const SubMenu = ({ isShowSliderMenu, closeSidebar }) => {
         </div>
       }
 
-      <div className={`subMenuWrapper ${isActiveFixMenu ? 'fixed-submenu' : ''} ${isShowSliderMenu && 'active-submenu'}`}>
+      <div className={`subMenuWrapper ${isActiveFixMenu ? 'fixed-submenu' : ''} ${isShowSliderMenu ? 'active-submenu' : ''}`}>
         <SearchInput />
         <div className="submenu-row">
           <ul className="submenu-list">

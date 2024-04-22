@@ -29,18 +29,18 @@ table tr {
   button {
     font-size: 12px;
   }
-  .btn-quick-view {
-    padding: 5px 30px;
-    border: 1px solid black;
-    background: transparent;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.2s;
-    &:hover {
-      background-color: var(--charcoal);
-      color: var(--white);
-    }
-  }
+  // .btn-quick-view {
+  //   padding: 5px 30px;
+  //   border: 1px solid var(--midnight-black);
+  //   background: transparent;
+  //   cursor: pointer;
+  //   font-weight: 600;
+  //   transition: all 0.2s;
+  //   &:hover {
+  //     background-color: var(--charcoal);
+  //     color: var(--white);
+  //   }
+  // }
 }
 
 @include device-breakpoint("large-mobile") {

@@ -6,28 +6,29 @@ import './ArtclesSection.scss'
 const ArtclesSection = () => {
     const articleData = [
         {
-            articlePicture:'/public/post-1.jpg',
+            articlePicture: '/public/post-1.jpg',
             articleTitle: "نوشیدنی جدید",
             category: ["غذا", "نوشیدنی"],
             articleDescription: "این غذا بسیار خوشمزه و لذیذ است و می‌تواند تجربه‌ای لذت‌بخش برای شما باشد."
         },
         {
-            articlePicture:'/public/post-3.jpg',
+            articlePicture: '/public/post-3.jpg',
             articleTitle: "غذای خوشمزه",
             category: ["غذا"],
             articleDescription: "این غذا بسیار خوشمزه و لذیذ است و می‌تواند تجربه‌ای لذت‌بخش برای شما باشد."
         },
         {
-            articlePicture:'/public/post-2.jpg',
+            articlePicture: '/public/post-2.jpg',
             articleTitle: "دسر شیرین",
             category: ["غذا", "دسر"],
             articleDescription: "دسر شیرین و خوشمزه‌ای که می‌تواند به عنوان پایانی خوب برای هر وعده غذایی باشد."
         }
     ];
     return (
-        <div className='articlesWrapper'>
+        <div className='articlesWrapper '>
+            <SectionHeader title="پست های اخیر" />
             <div className="container">
-                <SectionHeader title="پست های اخیر" />
+
                 <div className="ArticleRow">
                     <Slider
                         Array={articleData}

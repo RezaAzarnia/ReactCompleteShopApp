@@ -14,7 +14,7 @@ const NewArrivals = () => {
                         <h2 className='text-title'>گوشت تازه </h2>
                         <h2 className='text-primary'>شروع از 250تومان </h2>
                         <div className="text-row">
-                            <Link>
+                            <Link to='shop/گوشت%20و%20ماهی'>
                                 خریدکنید
                             </Link>
                             <GoArrowLeft />
@@ -29,10 +29,10 @@ const NewArrivals = () => {
                         <h2 className='text-white'>نان جدید </h2>
                         <h2 className='text-white'>تا 25% تخفیف</h2>
                         <div className="text-row">
-                            <Link className='text-white'>
+                            <Link to='/shop' className='text-white'>
                                 خریدکنید
                             </Link>
-                            <GoArrowLeft className='text-white'/>
+                            <GoArrowLeft className='text-white' />
                         </div>
                     </div>
                 </div>

@@ -1,12 +1,11 @@
 .productCard {
-  @include position(relative);
+  position: relative;
   width: 100%;
   overflow: hidden;
   .productCardPicture {
     margin-bottom: 20px;
-    height: 80%;
     img {
-      min-height: 270px;
+      min-height: 320px;
       @include size(100%, 100%);
     }
   }
@@ -19,7 +18,7 @@
   }
 }
 .productCard .productCardIcons {
-  @include position(absolute, $top: 10px, $left: -20%);
+  @include position(absolute, $top: 10px, $left: -30%);
   transition: all 0.5s;
   .card-icon {
     @include size(35px, 35px);
@@ -70,7 +69,8 @@
   box-sizing: border-box;
   animation: rotation 0.5s linear infinite;
 }
-.addToCart {
+.addToCart,
+.likeProduct {
   &:hover {
     .spinner-loader {
       border: 2px solid var(--white);
@@ -84,5 +84,10 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+@include device-breakpoint("phone-size") {
+  .productCard .productCardPicture img {
+    min-height: 180px;
   }
 }

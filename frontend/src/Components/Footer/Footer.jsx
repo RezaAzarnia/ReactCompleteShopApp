@@ -19,7 +19,6 @@ const Footer = () => {
             items: ['******0937', 'تبریز', 'rezaazarnia@gmail.com', 'شنبه تا پنجشنبه']
         }
     ];
-
     return (
         <footer>
             <div className="footerWrapper container">
@@ -37,7 +36,6 @@ const Footer = () => {
                                         }
                                     </ul>
                                 </div>
-
                             )
                         })
                     }

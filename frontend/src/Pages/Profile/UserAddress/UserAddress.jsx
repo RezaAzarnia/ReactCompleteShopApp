@@ -74,7 +74,7 @@ const UserAddress = ({ userInfo }) => {
                         </div>
                     </>
                 ) : (
-                    <span>آدرسی ثبت نشده است</span>
+                    <span className='error-alert'>آدرسی ثبت نشده است</span>
                 )
             }
 

@@ -4,7 +4,9 @@ import './ScrollToTopButton.scss'
 const ScrollToTopButton = () => {
     const [isActive, setIsActive] = useState(false)
     const [progresSize, setProgressSize] = useState(0)
+
     const handleScrollAction = () => {
+        //*152 because the circle fill in the 152 
         const progressBar = Math.trunc((window.scrollY / (document.body.scrollHeight - window.innerHeight)) * 152)
         setProgressSize(progressBar)
         setIsActive(window.scrollY >= 300)

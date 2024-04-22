@@ -9,18 +9,29 @@ import './CartSummary.scss'
 
 const CartSummary = () => {
     const methods = useForm();
-    const { reset, handleSubmit } = methods;
+    const { handleSubmit } = methods;
     const [countryStates, setCountryStates] = useState([])
     const cartTotalPrice = useSelector(selectCartTotalPrice)
 
-    const getStates = async () => {
-        const allState = await getCountryStates()
-        setCountryStates(allState)
-    }
     useEffect(() => {
+        const getStates = async () => {
+            try {
+                const allState = await getCountryStates()
+                setCountryStates(allState)
+            } catch (error) {
+                console.log('error');
+            }
+        }
         getStates()
     }, [])
-    
+    const renderCountryStateOptions = () => {
+        return (
+            countryStates.map((item, index) => {
+                return <option value={item.name} key={index + 1}>{item.name}</option>
+            })
+        )
+
+    };
     return (
         <div className="cart-summary-container">
             <h3 className='cart-summary-title '>مجموع سبد خرید</h3>
@@ -41,12 +52,7 @@ const CartSummary = () => {
                             </Input>
                             <Input name='state' type='select'>
                                 <option value=''>یک گزینه را انتخاب کنید</option>
-                                {
-                                    countryStates.length > 0 &&
-                                    countryStates.map((item, index) => {
-                                        return <option value={item.name} key={index + 1}>{item.name}</option>
-                                    })
-                                }
+                                {renderCountryStateOptions()}
                             </Input>
                             <Input name='city' placeholder='شهر' />
                             <Input name='user' placeholder='کدپستی' />

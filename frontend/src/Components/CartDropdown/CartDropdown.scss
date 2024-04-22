@@ -13,7 +13,7 @@
     width: 100%;
   }
   .card-header-wrapper {
-    @include position(sticky);
+    position: sticky;
     grid-column: 1;
     height: 100%;
     background: var(--white);
@@ -71,5 +71,12 @@
     a {
       @include text-format(15px, var(--primary));
     }
+  }
+}
+
+@include device-breakpoint("phone-size") {
+  .cartWrapper .cart-items-row {
+    min-width: 300px;
+    width: 100%;
   }
 }

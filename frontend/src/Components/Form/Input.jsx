@@ -1,8 +1,7 @@
 import React from "react";
 import { useFormContext } from "react-hook-form";
 import './Input.scss'
-const Input = (props) => {
-    const { name, rules, id, type, placeholder, lableTitle, children, onChange ,value} = props;
+const Input = ({name, rules, id, type, placeholder, lableTitle, children, onChange ,value}) => {
     const {
         register,
         formState: { errors },

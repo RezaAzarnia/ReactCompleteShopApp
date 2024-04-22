@@ -60,7 +60,11 @@ const ProductDetail = ({ slideMode, id: productId, productName, productImage, de
             })
             setIsShowPrevSlide(true)
         }
-    }, [productIndex, findProductIndex])
+    }, [productIndex, products, findProductIndex])
+
+    useEffect(() => {
+        findProductIndex()
+    }, [productId])
 
     //handle the product in cart 
     useEffect(() => {
@@ -70,17 +74,13 @@ const ProductDetail = ({ slideMode, id: productId, productName, productImage, de
         }
     }, [isProductInCart, cartItems]);
 
-    useEffect(() => {
-        findProductIndex()
-    }, [productId])
+
 
     //generate simple random number for the product id
     const generateProductId = useMemo(() => {
-        const memoizeValue = () => {
-            return String(Math.floor(Math.random() * 124578245))
-        }
-        return memoizeValue()
-    }, [])
+        return String(Math.floor(Math.random() * 124578245))
+    }, [productId])
+
     return (
         <div className="container product-detail-wrapper">
             <div className="product-detail-row">
@@ -196,9 +196,11 @@ const ProductDetail = ({ slideMode, id: productId, productName, productImage, de
                             </div>
                         ) : (
                             <div className="add-to-cart">
-                                <button className='addCartButton' onClick={() => handleAddCart(+productId, productName, price, productImage)}>
+                                <button className='addCartButton'
+                                    disabled={addToCartStatus == 'loading'}
+                                    onClick={() => handleAddCart(+productId, productName, price, productImage)}>
                                     {
-                                        addToCartStatus == 'loading' ? "loading" : <>
+                                        addToCartStatus == 'loading' ? <div className="button-loader"></div> : <>
                                             <BsBag className='bag-icon' />
                                             افزودن به سبد خرید
                                         </>
