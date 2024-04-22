@@ -1,4 +1,4 @@
-.confirm-modal {
+.exit-modal {
   gap: 10px;
   max-width: 740px;
   text-align: right;
@@ -15,7 +15,7 @@
     }
   }
 }
-.confirm-modal-button {
+.exit-modal-button {
   @include flex($justify: end , $gap:10px);
   width: 100%;
   button {

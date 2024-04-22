@@ -38,23 +38,15 @@ a {
   border: 1px solid #f5c6cb; // Border color
   border-radius: 4px; // Rounded corners
   text-transform: capitalize;
+  display: block;
+  width: 100%;
 }
 
 .container {
   width: 100%; /* Default width */
   max-width: 100%; /* Default max-width */
   margin: 0 auto;
-  /* Medium devices (tablets, 768px and up) */
-  // @media (min-width: 768px) {
-  //   max-width: 720px;
-  // }
 
-  // /* Large devices (desktops, 992px and up) */
-  // @media (min-width: 991px) {
-  //   max-width: 885px;
-  // }
-
-  // /* Extra large devices (large desktops, 1200px and up) */
   @media (min-width: 1200px) {
     max-width: 1200px;
   }

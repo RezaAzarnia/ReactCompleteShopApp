@@ -1,18 +1,44 @@
 .profile-menu-list {
   .profile-menu-list-item {
-    padding: 15px;
     margin: 10px 0;
     background-color: var(--cloud-gray);
-    transition: all 0.2s;
-    &:hover {
-      border-right: 4px solid var(--primary);
+    min-height: 45px;
+    @include flex($align: center);
+    cursor: pointer;
+    position: relative;
+    &:hover::before {
+      content: "";
+      @include position(absolute, $top: 0, $right: -3px);
+      @include size(3px, 100%);
+      background-color: var(--primary);
+      animation: fade 0.3s;
+    }
+  }
+}
+.profile-menu-list {
+  .profile-menu-list-item {
+    &:last-child {
+      padding: 13px;
     }
     a {
       display: block;
+      @include size(100%, 100%);
+      padding: 13px;
     }
   }
 }
 
-.profile-menu-list-item:has(> a.active) {
-  border-right: 4px solid var(--primary);
+.profile-menu-list-item:has(> a.active)::before {
+  content: "";
+  @include position(absolute, $top: 0, $right: -3px);
+  @include size(3px, 100%);
+  background-color: var(--primary);
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }

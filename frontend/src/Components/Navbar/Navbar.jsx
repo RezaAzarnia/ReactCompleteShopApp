@@ -18,15 +18,20 @@ const Navbar = ({ isUserLogin }) => {
     const userCartLength = useSelector(selectUserCartLength)
     const { pathname } = useLocation();
 
+    // disable the body when the sidebar is open
     const toggleMenuSidebar = () => {
         setIsOpenMenuSlider(!isOpenMenuSlider)
         document.body.classList.toggle('disable-scroll', !isOpenMenuSlider);
     }
+    // close the side bar by change the path name
     useEffect(() => {
         isOpenMenuSlider &&
             toggleMenuSidebar()
     }, [pathname])
 
+    const toggleShowCart = () => {
+        setIsShowCart(prev => !prev);
+    };
     return (
         <>
             <div className="container">
@@ -38,7 +43,7 @@ const Navbar = ({ isUserLogin }) => {
                             </div>
                             {/* show the haburger menu in little size */}
                             <div className="hamburger-icon">
-                                <RxHamburgerMenu  onClick={toggleMenuSidebar}/>
+                                <RxHamburgerMenu onClick={toggleMenuSidebar} />
                             </div>
                             <div className="logo-part">
                                 <Link to='/'>
@@ -65,7 +70,9 @@ const Navbar = ({ isUserLogin }) => {
                                         </Link>
                                     </div>
 
-                                    <div className="user-cart" onMouseEnter={() => setIsShowCart(true)} onMouseLeave={() => setIsShowCart(false)}>
+                                    <div className="user-cart"
+                                        onMouseEnter={toggleShowCart}
+                                        onMouseLeave={toggleShowCart}>
                                         <Link to='/cart'>
                                             <BsBag className='navbar-icon' />
                                         </Link>

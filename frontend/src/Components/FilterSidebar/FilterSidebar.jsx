@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import Button from '../Button/Button';
-import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+import { Link } from 'react-router-dom';
+import { TfiClose } from 'react-icons/tfi';
+import Button from '../Button/Button';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import './FilterSidebar.scss'
-import { TfiClose } from 'react-icons/tfi';
 
 const FilterSidebar = ({ isOpenFilterSidebar, onClose, products, setProducts }) => {
   const allProducts = useSelector(state => state.products.products)
   const [cateories, setCategories] = useState([])
   const [priceRange, setPriceRange] = useState([])
   const [selectedPriceRange, setSelectedPriceRange] = useState([]);
+
   useEffect(() => {
     const uniqueCategries = [...new Set(allProducts.map(item => item.category))]
     const newData = uniqueCategries.map(item => {
@@ -28,12 +29,10 @@ const FilterSidebar = ({ isOpenFilterSidebar, onClose, products, setProducts }) 
     if (products.length < 2) {
       setPriceRange([0, products[0].price])
       setSelectedPriceRange([0, products[0].price]);
-      return
     } else {
       let sortedArray = [...products].sort((a, b) => a.price - b.price);
 
       setPriceRange([sortedArray[0].price, sortedArray[sortedArray.length - 1].price]);
-
 
       setSelectedPriceRange([sortedArray[0].price, sortedArray[sortedArray.length - 1].price]);
     }
@@ -41,14 +40,15 @@ const FilterSidebar = ({ isOpenFilterSidebar, onClose, products, setProducts }) 
 
   const filterPrice = () => {
     const filteredPriceArray = [...products].filter(item => item.price >= selectedPriceRange[0] && item.price <= selectedPriceRange[1])
-
     setProducts(filteredPriceArray)
   }
+
   const closeSidebarInBigScreen = () => {
     if (window.innerWidth > 990 && isOpenFilterSidebar) {
       onClose()
     }
   }
+  
   useEffect(() => {
     window.addEventListener('resize', closeSidebarInBigScreen)
     return () => {
@@ -72,7 +72,6 @@ const FilterSidebar = ({ isOpenFilterSidebar, onClose, products, setProducts }) 
               <h3 className='sidebar-title'>همه دسته بندی ها</h3>
             </li>
             {
-              cateories.length > 0 &&
               cateories.map((category, index) => {
                 return (
                   <li className='sidebar-items' key={index + 1}>

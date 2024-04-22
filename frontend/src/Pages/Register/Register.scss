@@ -1,26 +1,26 @@
-.register-wrapper {
-  padding: 0 20px;
-}
-
 .register-container {
-  max-width: 525px;
-  min-height: 500px;
-  margin: 60px auto;
-  border: 0.75px solid lightgray;
-  padding: 30px;
-  text-align: right;
-  box-shadow: 1px 0px 3px 0px gray;
+  padding: 0 20px;
+  .form-box {
+    max-width: 525px;
+    min-height: 500px;
+    margin: 60px auto;
+    border: 0.75px solid lightgray;
+    padding: 30px;
+    text-align: right;
+    box-shadow: 1px 0px 3px 0px gray;
+  }
   form {
     padding: 25px 0 10px;
   }
-  .input-group {
-    padding: 7px 0;
-    input {
-      border: 0.75px solid lightgray;
-      border-radius: 0;
-    }
+}
+.form-box .input-group {
+  padding: 7px 0;
+  input {
+    border: 0.75px solid lightgray;
+    border-radius: 0;
   }
 }
+
 .register-container {
   .form-header {
     font-size: 17px;

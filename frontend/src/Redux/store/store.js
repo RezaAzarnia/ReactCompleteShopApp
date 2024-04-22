@@ -11,4 +11,5 @@ export const store = configureStore({
     products: productsSlice,
     wishList: wishListSlice,
   },
+  devTools: false,
 });

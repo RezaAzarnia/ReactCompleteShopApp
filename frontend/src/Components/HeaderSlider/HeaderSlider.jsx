@@ -14,11 +14,19 @@ const HeaderSlider = () => {
                 pagination={{
                     clickable: true,
                 }}
+                grabCursor={true}
                 modules={[Pagination]}
             >
                 <SwiperSlide>
                     <div className="slider-picture">
-                        <img src="../public/slider-1.jpg" alt="header slider" />
+                        <img
+                            sizes="(max-width: 1400px) 100vw, 1400px"
+                            srcSet="
+                              /public/slider-1_o9q5ka_c_scale,w_200.jpg 200w,
+                              /public/slider-1_o9q5ka_c_scale,w_1030.jpg 1030w,
+                              /public/slider-1_o9q5ka_c_scale,w_1400.jpg 1400w"
+                            src="slider-1_o9q5ka_c_scale,w_1400.jpg"
+                            alt="" />
                         <div className="slider-text-wrapper">
                             <div className="text-sm">
                                 <span>به فروشگاه خوش آمدید!</span>
@@ -30,7 +38,7 @@ const HeaderSlider = () => {
                                 </h1>
                             </div>
                             <div className="slider-btn">
-                                <Button title="خرید کنید" />
+                                <Button title="خرید کنید" to='/shop/سبزیجات' />
                             </div>
                         </div>
                     </div>
@@ -38,7 +46,14 @@ const HeaderSlider = () => {
 
                 <SwiperSlide>
                     <div className="slider-picture">
-                        <img src="../public/slider-2.jpg" alt="header slider" />
+                        <img
+                            sizes="(max-width: 1400px) 100vw, 1400px"
+                            srcSet="
+                             /public/slider-2_x5ofc1_c_scale,w_200.jpg 200w,
+                             /public/slider-2_x5ofc1_c_scale,w_1067.jpg 1067w,
+                             /public/slider-2_x5ofc1_c_scale,w_1400.jpg 1400w"
+                            src="slider-2_x5ofc1_c_scale,w_1400.jpg"
+                            alt="" />
                         <div className="slider-text-wrapper">
                             <div className="text-sm">
                                 <span>جدیدترین محصولات را بررسی کنید!</span>
@@ -47,10 +62,10 @@ const HeaderSlider = () => {
                                 <h1 className='active'>سیب زمینی </h1>
                                 <h1>ارگانیک و ترد</h1>
                             </div>
-                            <div className="row">
+                            <div className="text-row">
                                 <span>شروع از 20هزار تومن</span>
                                 <div className="slider-btn">
-                                    <Button title="خرید کنید" />
+                                    <Button title="خرید کنید" to='/shop/سبزیجات' />
                                 </div>
                             </div>
                         </div>

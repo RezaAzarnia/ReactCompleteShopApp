@@ -1,5 +1,5 @@
 .shop-row {
-  @include flex($gap:20px);
+  @include flex($gap: 20px);
   flex-wrap: wrap;
   margin: 50px 0;
   padding: 0 10px;
@@ -10,6 +10,8 @@
 }
 .products-cards-row {
   @include grid($columns: repeat(3, 1fr), $gap: 20px);
+  justify-items: center;
+  align-items: end;
 }
 .not-found {
   margin: 50px 0;
@@ -40,6 +42,29 @@
     color: var(--white);
   }
 }
+
+.pagination-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 30px;
+  button {
+    border-radius: 50%;
+    font-size: 18px;
+    background: transparent;
+    border: 0.3px solid var(--slate-gray);
+    height: 35px;
+    width: 35px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}
 @include device-breakpoint("large-mobile") {
   .show-md {
     display: inline;
@@ -54,5 +79,11 @@
   }
   .show-md {
     display: none;
+  }
+}
+
+@media screen and (max-width: 570px) {
+  .products-cards-row {
+    grid-template-columns: repeat(1, 1fr);
   }
 }

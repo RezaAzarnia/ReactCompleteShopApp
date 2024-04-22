@@ -18,9 +18,8 @@ footer {
     @include text-format(18px, var(--white), "Estedad-bold");
   }
   .footerLists {
-    @include flex(column, $align: flex-start, $gap: 10px);
+    @include flex($direction:column, $align: flex-start, $gap: 10px);
     margin-top: 20px;
-
     .footerListItem {
       font-size: 15px;
       font-family: "Yekan";
@@ -45,6 +44,6 @@ footer {
 
 @media screen and (max-width: 425px) {
   .footer-row {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
   }
 }

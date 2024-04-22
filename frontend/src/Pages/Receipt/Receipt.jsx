@@ -9,13 +9,17 @@ import './Receipt.scss'
 const Receipt = () => {
   const { orderId } = useParams()
   const [userOrderInfo, setUserOrderInfo] = useState({})
-  const getOrderInfo = async () => {
-    const response = await getOrderDetail(orderId)
-    console.log(response);
-    setUserOrderInfo(response);
-  }
   const navigate = useNavigate()
+  
   useEffect(() => {
+    const getOrderInfo = async () => {
+      try {
+        const response = await getOrderDetail(orderId)
+        setUserOrderInfo(response);
+      } catch (error) {
+        console.log(error);
+      }
+    }
     getOrderInfo()
   }, [orderId])
 

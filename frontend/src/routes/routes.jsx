@@ -71,11 +71,11 @@ const routes = createBrowserRouter([
                     },
                     {
                         path: "downloads",
-                        element: ""
+                        element: <span className='error-alert'>این بخش در حال ساخت است</span>
                     },
                     {
                         path: "accountdetail",
-                        element: ""
+                        element: <span className='error-alert'>این بخش در حال ساخت است</span>
                     }
                 ]
             },

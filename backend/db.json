@@ -289,9 +289,56 @@
     }
   ],
   "users": [],
-  "userCart": [],
+  "userCart": [
+    {
+      "userId": 1,
+      "cartItems": [
+        {
+          "id": 1,
+          "productName": "موز تازه",
+          "price": 75000,
+          "productCover": "/public/products/fruits/banana-1-1.jpg",
+          "quantity": 1
+        },
+        {
+          "id": 8,
+          "productName": "کلم تازه",
+          "price": 25000,
+          "productCover": "/public/products/vegtebales/cabbage-1.jpg",
+          "quantity": 1
+        },
+        {
+          "id": 3,
+          "productName": "نارگیل",
+          "price": 80000,
+          "productCover": "/public/products/fruits/coconut-1-1.jpg",
+          "quantity": 2
+        }
+      ],
+      "id": 1
+    }
+  ],
   "userOrders": [],
-  "wishList": [],
+  "wishList": [
+    {
+      "userId": 1,
+      "wishListItems": [
+        {
+          "productId": 2,
+          "productName": "شاه توت تازه",
+          "price": 50000,
+          "productCover": "/public/products/fruits/blackberry-2-1.jpg"
+        },
+        {
+          "productId": 3,
+          "productName": "نارگیل",
+          "price": 80000,
+          "productCover": "/public/products/fruits/coconut-1-1.jpg"
+        }
+      ],
+      "id": 1
+    }
+  ],
   "states": [
     {
       "name": "آذربايجان شرقی",

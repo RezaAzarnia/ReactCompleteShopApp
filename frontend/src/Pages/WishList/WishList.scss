@@ -28,9 +28,11 @@
   margin: 60px auto;
   text-align: center;
 }
+.wishlistTabel {
+  padding: 0 20px;
+}
 @include device-breakpoint("large-mobile") {
-  .wishlistContainer {
-    padding: 20px;
+  .wishlistTabel {
     .wishlist-table-row {
       td:last-child {
         @include flex(
@@ -43,7 +45,7 @@
       }
     }
   }
-  .wishlistContainer {
+  .wishlistTabel {
     table td {
       text-align: center;
       &::before {

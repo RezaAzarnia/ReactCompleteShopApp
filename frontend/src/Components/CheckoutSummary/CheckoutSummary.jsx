@@ -1,7 +1,29 @@
 import React from 'react'
 import Button from '../Button/Button'
 import './CheckoutSummary.scss'
-const CheckoutSummary = ({ cartItem, totalPrice, setPaymentMode, paymentMode, onClick ,isLoading}) => {
+const CheckoutSummary = ({ cartItem, totalPrice, setPaymentMode, paymentMode, onClick, isLoading }) => {
+    
+    const renderPaymentMethod = (name, label, info) => {
+        return (
+            <div className="payment-method">
+                <div className='input-radio-row'>
+                    <label htmlFor={`${name}-checked`}>{label}</label>
+                    <input
+                        type="radio"
+                        name={name}
+                        id={`${name}-checked`}
+                        checked={paymentMode === name}
+                        onChange={(e) => setPaymentMode(e.target.name)}
+                    />
+                </div>
+                <div className={`payment-collapse ${paymentMode === name ? 'show' : ''}`}>
+                    <p className="payment-info">{info}</p>
+                </div>
+            </div>
+        );
+    };
+
+
     return (
         <div className="checkout-information-sidebar">
             <div className="checkout-card-title">
@@ -47,43 +69,12 @@ const CheckoutSummary = ({ cartItem, totalPrice, setPaymentMode, paymentMode, on
             <div className="checkout-payment-way">
                 <h3>روش های پرداخت</h3>
                 <div className="payment-methods">
-                    <div className="creadit-card-method">
-                        <div className='input-radio-row'>
-                            <label htmlFor="credit-checked">انتقال مستقیم بانکی</label>
-                            <input
-                                type="radio"
-                                name="onlineMode"
-                                id="credit-checked"
-                                checked={paymentMode == "onlineMode"}
-                                onChange={(e) =>
-                                    setPaymentMode(e.target.name)
-                                } />
-
-                        </div>
-                        <div className={`payment-collapse ${paymentMode == "onlineMode" ? 'show' : ''}`}  >
-                            <p className={`payment-info`}>
-                                پرداخت خود را مستقیما به حساب بانکی ما واریز کنید.خواهشمندیم شماره سفارش خود را بعنوان کد ارجاع پرداخت استفاده کنید.سفارش شما تا زمانی که وجوه به حساب ما وارد نشود ارسال نخواهد شد.
-                            </p>
-                        </div>
-                    </div>
-                    <div className="cash-method" >
-                        <div className='input-radio-row'>
-                            <label htmlFor="cash-checked"> پرداخت هنگام دریافت</label>
-                            <input type="radio"
-                                name="cashMode"
-                                id="cash-checked"
-                                checked={paymentMode == "cashMode"}
-                                onChange={(e) =>
-                                    setPaymentMode(e.target.name)
-                                }
-                            />
-                        </div>
-                        <div className={`payment-collapse ${paymentMode == "cashMode" ? 'show' : ''}`} >
-                            <p className="payment-info">
-                                پرداخت نقدی پس از تحویل
-                            </p>
-                        </div>
-                    </div>
+                    {renderPaymentMethod(
+                        "onlineMode",
+                        "انتقال مستقیم بانکی",
+                        "پرداخت خود را مستقیما به حساب بانکی ما واریز کنید.خواهشمندیم شماره سفارش خود را بعنوان کد ارجاع پرداخت استفاده کنید.سفارش شما تا زمانی که وجوه به حساب ما وارد نشود ارسال نخواهد شد."
+                    )}
+                    {renderPaymentMethod("cashMode", "پرداخت هنگام دریافت", "پرداخت نقدی پس از تحویل")}
                 </div>
             </div>
             <div className="border-line"></div>
@@ -94,7 +85,7 @@ const CheckoutSummary = ({ cartItem, totalPrice, setPaymentMode, paymentMode, on
                         تمامی قوانین سایت را میپذیرم
                     </label>
                 </div>
-                <Button title="ثبت سفارش" onClick={onClick}  isLoading={isLoading}/>
+                <Button title="ثبت سفارش" onClick={onClick} isLoading={isLoading} />
             </div>
         </div>
     )

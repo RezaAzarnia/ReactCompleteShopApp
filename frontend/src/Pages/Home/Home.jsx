@@ -19,27 +19,29 @@ const Home = () => {
       <TopProducts />
       <WhyUs />
       <TopSales />
-      <div className="topFoodSaler">
-        <div className="container">
-          <div className="topSalerPicture">
-            <div className="topSalerInfo">
-              <div className="info-right-side">
-                <div className="top-saler-top-title">
-                  <span>برترین فروشنده هفته</span>
-                </div>
-                <div className="top-info-title">
-                  <h2>غذایی خوشمزه برای شما!</h2>
-                  <div>
-                    <h2>از</h2>
-                    <h2 style={{ color: "var(--primary)" }}>19000 تومان</h2>
-                  </div>
-                </div>
-              </div>
-              <div className="info-left-side">
-                <h2>100% طبیعی </h2>
-                <Link to='/shop'>خرید کنید</Link>
+      <div className="topFoodSaler container">
+        <img
+          sizes="(max-width: 1240px) 100vw, 1240px"
+          srcSet="
+            /public/burger_ivaaio_c_scale,w_200.jpg 200w,
+            /public/burger_ivaaio_c_scale,w_965.jpg 965w,
+            /public/burger_ivaaio_c_scale,w_1240.jpg 1240w"
+          src="burger_ivaaio_c_scale,w_1240.jpg"
+          alt="" />
+        <div className="topSalerInfo">
+          <div className="info-right-side">
+            <span className="top-saler-top-title">برترین فروشنده هفته</span>
+            <div className="top-info-title">
+              <h2>غذایی خوشمزه برای شما!</h2>
+              <div>
+                <h2>از</h2>
+                <h2 style={{ color: "var(--primary)" }}>19000 تومان</h2>
               </div>
             </div>
+          </div>
+          <div className="info-left-side">
+            <h2>100% طبیعی </h2>
+            <Link to='/shop'>خرید کنید</Link>
           </div>
         </div>
       </div>

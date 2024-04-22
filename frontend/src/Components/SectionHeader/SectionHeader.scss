@@ -13,3 +13,9 @@
     margin: auto;
   }
 }
+
+@include device-breakpoint("phone-size") {
+  .sectionHeaderWrappper .sectionTitle {
+    font-size: 28px;
+  }
+}

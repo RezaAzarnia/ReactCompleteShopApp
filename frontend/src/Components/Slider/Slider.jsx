@@ -9,6 +9,7 @@ const Slider = ({ Array, Card, paginationMode, sizeInfoArray, spaceBetween = 10 
     const [slidesPerview, setSlidesPerview] = useState(1)
 
     useEffect(() => {
+        //change the slider size by the window size (find and apply it)
         const changeScreenSize = () => {
             const currentSize = sizeInfoArray.find(item => window.innerWidth < item.size);
             if (currentSize) {

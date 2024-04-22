@@ -6,16 +6,16 @@ import WithAuth from '../../../HOC/WithAuth'
 import './Orders.scss'
 const Orders = ({ userInfo }) => {
   const [userOrders, setUserOrders] = useState([])
-  const getOrders = async () => {
-    try {
-      const response = await getUserOrders(userInfo.id)
-      setUserOrders(response)
-      console.log(response.length);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+  
   useEffect(() => {
+    const getOrders = async () => {
+      try {
+        const response = await getUserOrders(userInfo.id)
+        setUserOrders(response)
+      } catch (error) {
+        console.log(error);
+      }
+    }
     getOrders()
   }, [userInfo])
 

@@ -2,23 +2,30 @@ import React, { useState } from 'react'
 import { SlCloudDownload, SlHeart } from "react-icons/sl";
 import { BiUser } from "react-icons/bi";
 import { CiLocationOn, CiLogout } from "react-icons/ci";
-import { handleLogout } from '../../../Redux/slices/userSlice';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, } from 'react-router-dom';
 import { TbChecklist } from "react-icons/tb";
-import { useDispatch } from 'react-redux';
-import ConfirmModal from '../../../Components/Modals/ConfirmModal/ConfirmModal';
+import ExitModal from '../../../Components/Modals/ExitModal/ExitModal';
 import WithAuth from '../../../HOC/WithAuth'
 import './ProfileIndex.scss'
 
+const ProfileMenuItem = ({ item, onClick }) => {
+  return (
+    <div className="profile-menu-card" key={item.id} onClick={onClick}>
+      <Link to={item.to} className='menu-card-link'>
+        <div className="card-icon">
+          {item.icon}
+        </div>
+        <div className='card-text'>
+          <span>{item.text}</span>
+        </div>
+      </Link>
+    </div>
+  )
+}
+
 const ProfileIndex = ({ userInfo }) => {
   const [isShowModal, setIsShowModal] = useState(false)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
 
-  const logout = () => {
-    dispatch(handleLogout())
-    navigate('/')
-  }
   const profileCardMenu = [
     { id: 1, to: '/profile/orders', icon: <TbChecklist />, text: 'سفارشات من' },
     { id: 5, to: '/wishlist', icon: <SlHeart />, text: 'لیست علاقه‌مندی‌ها' },
@@ -27,16 +34,17 @@ const ProfileIndex = ({ userInfo }) => {
     { id: 3, to: '/profile/address', icon: <CiLocationOn />, text: 'آدرس' },
     { id: 6, icon: <CiLogout />, text: 'خروج از حساب کاربری' }
   ];
-
+  const handleModalToggle = () => {
+    setIsShowModal(!isShowModal);
+  };
   return (
     <>
       {
-        isShowModal && 
-        <ConfirmModal
-          action='exit'
+        isShowModal &&
+        <ExitModal
           isOpen={isShowModal}
-          onCancel={() => setIsShowModal(false)}
-          onConfirm={logout} />
+          onCancel={handleModalToggle}
+        />
       }
 
       <div className='profile-text'>
@@ -46,35 +54,14 @@ const ProfileIndex = ({ userInfo }) => {
         </p>
       </div>
       <div className='profile-cards-row'>
+
         {
           profileCardMenu.map(item => {
-            if (item.to) {
-              return (
-                <div className="profile-menu-card" key={item.id}>
-                  <Link to={item.to} className='menu-card-link'>
-                    <div className="card-icon">
-                      {item.icon}
-                    </div>
-                    <div className='card-text'>
-                      <span>{item.text}</span>
-                    </div>
-                  </Link>
-                </div>
-              )
-            } else {
-              return (
-                <div className="profile-menu-card" style={{ cursor: "pointer" }} key={item.id} onClick={() => setIsShowModal(true)}>
-                  <div className="card-icon">
-                    {item.icon}
-                  </div>
-                  <div className='card-text'>
-                    <span>{item.text}</span>
-                  </div>
-                </div>
-              )
-            }
+            const onClick = item.to ? null : handleModalToggle;
+            return <ProfileMenuItem key={item.id} item={item} onClick={onClick} />;
           })
         }
+
       </div >
     </>
   )

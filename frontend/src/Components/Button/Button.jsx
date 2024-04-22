@@ -13,25 +13,23 @@ const Button = ({ to, title, onClick, isLoading, variant = 'contained' }) => {
         case "error":
             className = 'error-button'
             break;
-        default:
-            break;
     }
     return (
         <div className='button-wrapper'>
             {
                 to ?
                     (
-                        <Link to={to} className={className}>
+                        <Link to={to} className={`button ${className}`}>
                             {title}
                         </Link>
                     ) : (
-                        <button className={className}
+                        <button className={`button ${className}`}
                             onClick={onClick}
                             disabled={isLoading}
                         >
                             {
                                 isLoading ?
-                                    <div class="button-loader"></div> :
+                                    <div className="button-loader"></div> :
                                     title
                             }
                         </button>

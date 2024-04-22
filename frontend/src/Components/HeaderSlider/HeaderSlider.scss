@@ -1,19 +1,22 @@
 .headerSliderContainer {
   .slider-picture {
     @include size(100%, 80vh);
+    max-height: 75vh;
+    @include grid($columns: repeat(3, 1fr), $rows: repeat(3, 1fr));
+    justify-items: center;
+    align-items: center;
+    line-height: 2;
     img {
       @include size(100%, 100%);
-      object-fit: cover;
+      grid-column: 1 / 4;
+      grid-row: 1 / 4;
     }
   }
 }
 
 .slider-text-wrapper {
-  @include flex(column, center);
-  @include position(absolute, $top: 0, $right: 12.5%, $left: 0);
-  @include size(100%, 100%);
-  line-height: 1.75;
-  text-align: right;
+  grid-column: 1;
+  grid-row: 2 / 3;
   .text-sm {
     position: relative;
     font-family: "Yekan";
@@ -27,7 +30,7 @@
 }
 .slider-title {
   h1 {
-    @include text-format(35px, $fontFamilly: "pinar");
+    @include text-format(40px, $fontFamilly: "pinar");
     text-wrap: pretty;
     &.active {
       color: var(--primary);
@@ -35,21 +38,39 @@
   }
 }
 .slider-text-wrapper {
+  .text-row {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
   .slider-btn {
-    margin-top: 10px;
     width: 150px;
   }
 }
+
 .swiper-pagination-bullet-active {
   @include size(20px, 8px);
   background: var(--primary);
   border-radius: 20px;
 }
 @include device-breakpoint("large-mobile") {
+  .headerSliderContainer .slider-picture {
+    grid-template-columns: 1fr;
+    justify-items: start;
+  }
+  .slider-title h1{
+    font-size: 35px;
+  }
   .slider-text-wrapper {
-    right: 7.5%;
-    .slider-btn {
-      width: max-content;
+    margin-right: 15px;
+    .text-sm::before {
+      content: unset;
+    }
+
+    .text-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0;
     }
   }
 }
