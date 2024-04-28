@@ -49,8 +49,6 @@
   }
 }
 
-@include device-breakpoint("tablet-size") {
-}
 @include device-breakpoint("tablet-portrait") {
   .simple-modal {
     min-width: 400px;

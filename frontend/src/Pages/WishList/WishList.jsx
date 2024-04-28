@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import PageTitle from '../../Components/PageTitle/PageTitle';
 import BreadCrump from '../../Components/BreadCrump/BreadCrump';
 import Button from '../../Components/Button/Button';
@@ -9,10 +9,10 @@ import { IoMdClose } from "react-icons/io";
 import withAuth from '../../HOC/WithAuth'
 import useAddCart from '../../hooks/useAddCart';
 import EmptyWishlistIcon from '../../Icons/EmptyWishlistIcon';
-import './Wishlist.scss'
+import './WishList.scss'
 const WishList = ({ userInfo }) => {
     const userWishListItems = useSelector(state => state.wishList.wishlistItems)
-    const { handleAddCart } = useAddCart()
+    const { handleAddCart, addToCartStatus } = useAddCart()
     return (
         <div className='wishlistWrapper'>
             <PageTitle title="لیست علاقه مندی ها" />
@@ -42,6 +42,7 @@ const WishList = ({ userInfo }) => {
                                                     item={item}
                                                     handleAdd={() => handleAddCart(item.productId, item.productName, item.price, item.productCover)}
                                                     handleDelete={() => handleDeleteLikedProduct({ userId: userInfo.id, productId: item.productId })}
+                                                    status={addToCartStatus}
                                                 />
                                             })
                                         }
@@ -55,9 +56,13 @@ const WishList = ({ userInfo }) => {
         </div>
     )
 }
-const WishListItem = ({ item, handleAdd, handleDelete }) => {
+const WishListItem = ({ item, status, handleAdd, handleDelete }) => {
     const dispatch = useDispatch()
+    const [isShowLoader, setIsShowLoader] = useState(false)
 
+    useEffect(() => {
+        status !== "loading" && setIsShowLoader(false)
+    }, [status])
     return <tr className='wishlist-table-row'>
         <td className='product-table-picture' >
             <div className="image-part">
@@ -77,7 +82,11 @@ const WishListItem = ({ item, handleAdd, handleDelete }) => {
         <td>
             <Button title="مشاهده سریع" variant='outlined' />
             <Button title="اضافه کردن به سبد خرید"
-                onClick={handleAdd}
+                onClick={() => {
+                    handleAdd()
+                    setIsShowLoader(true)
+                }}
+                isLoading={isShowLoader && status == 'loading' ? true : false}
             />
         </td>
     </tr>

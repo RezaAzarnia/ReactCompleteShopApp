@@ -47,7 +47,7 @@ const Navbar = ({ isUserLogin }) => {
                             </div>
                             <div className="logo-part">
                                 <Link to='/'>
-                                    <img src="/public/brandPicture.png" alt="" />
+                                    <img src="../brandPicture.png" alt="" />
                                 </Link>
                             </div>
 

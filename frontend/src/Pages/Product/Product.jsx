@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProductInfo } from '../../Redux/slices/productsSlice'
 import Slider from '../../Components/Slider/Slider'
-import './product.scss';
+import './Product.scss';
 
 
 const ProductDetailDescription = ({ description }) => {
@@ -85,7 +85,7 @@ const ProductDetailDescription = ({ description }) => {
                     </div>
                 </div>
                 <div className="left-side">
-                    <img src="/public/description-image.jpg" alt="" />
+                    <img src="../description-image.jpg" alt="" />
                 </div>
             </div>
             <div className="product-delevry-infos">
@@ -149,9 +149,9 @@ const Product = () => {
 
 
             <div className="suggestedProucts">
-                <SectionHeader title="محصولات مرتبط" />
                 <ProductDetailDescription description={productInfo?.description} />
                 <div className="container">
+                    <SectionHeader title="محصولات مرتبط" />
                     <Slider
                         Array={sameCategory}
                         Card={ProductCard}

@@ -22,10 +22,10 @@ const HeaderSlider = () => {
                         <img
                             sizes="(max-width: 1400px) 100vw, 1400px"
                             srcSet="
-                              /public/slider-1_o9q5ka_c_scale,w_200.jpg 200w,
-                              /public/slider-1_o9q5ka_c_scale,w_1030.jpg 1030w,
-                              /public/slider-1_o9q5ka_c_scale,w_1400.jpg 1400w"
-                            src="slider-1_o9q5ka_c_scale,w_1400.jpg"
+                              ./slider-1_o9q5ka_c_scale,w_200.jpg 200w,
+                              ./slider-1_o9q5ka_c_scale,w_1030.jpg 1030w,
+                              ./slider-1_o9q5ka_c_scale,w_1400.jpg 1400w"
+                            src="./slider-1_o9q5ka_c_scale,w_1400.jpg"
                             alt="" />
                         <div className="slider-text-wrapper">
                             <div className="text-sm">
@@ -49,10 +49,10 @@ const HeaderSlider = () => {
                         <img
                             sizes="(max-width: 1400px) 100vw, 1400px"
                             srcSet="
-                             /public/slider-2_x5ofc1_c_scale,w_200.jpg 200w,
-                             /public/slider-2_x5ofc1_c_scale,w_1067.jpg 1067w,
-                             /public/slider-2_x5ofc1_c_scale,w_1400.jpg 1400w"
-                            src="slider-2_x5ofc1_c_scale,w_1400.jpg"
+                             ./slider-2_x5ofc1_c_scale,w_200.jpg 200w,
+                             ./slider-2_x5ofc1_c_scale,w_1067.jpg 1067w,
+                             ./slider-2_x5ofc1_c_scale,w_1400.jpg 1400w"
+                            src="./slider-2_x5ofc1_c_scale,w_1400.jpg"
                             alt="" />
                         <div className="slider-text-wrapper">
                             <div className="text-sm">

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from 'react'
+import React, { useEffect, useState, useCallback, useMemo, useReducer } from 'react'
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Rate from '../Rate/Rate'
@@ -18,53 +18,84 @@ import 'swiper/css/navigation';
 import 'swiper/css/thumbs';
 import './ProductDetail.scss'
 
+//intiialState for handling the slider product
+const initialState = {
+    productQuantity: 0,
+    productIndex: 0,
+    nextSliderProduct: null,
+    prevSliderProduct: null,
+    isShowNextSlide: null,
+    isShowPrevSlide: null,
+    isDisableNextIcon: false,
+    isDisablePrevIcon: false
+}
+//handle actions of reducer
+const reducer = (state, action) => {
+    switch (action.type) {
+        case "SET_PRODUCT_INDEX":
+            return { ...state, productIndex: action.payload }
+        case "SET_PRODUCT_QUANTITY":
+            return { ...state, productQuantity: action.payload }
+        case "SET_NEXT_SLIDER_PRODUCT":
+            return { ...state, nextSliderProduct: action.payload }
+        case "SET_PREV_SLIDER_PRODUCT":
+            return { ...state, prevSliderProduct: action.payload }
+        case "SET_SHOW_NEXT_SLIDE":
+            return { ...state, isShowNextSlide: action.payload }
+        case "SET_SHOW_PREV_SLIDE":
+            return { ...state, isShowPrevSlide: action.payload }
+        case "SET_PREV_DISABLE":
+            return { ...state, isDisablePrevIcon: action.payload }
+        case "SET_NEXT_DISABLE":
+            return { ...state, isDisableNextIcon: action.payload }
+        default:
+            return state;
+    }
+}
+
 const ProductDetail = ({ slideMode, id: productId, productName, productImage, description, price, category, rate }) => {
-    const [productQuantity, setProductQuantity] = useState(0)
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
-    const [productIndex, setProductIndex] = useState(0)
-    const [slideProduct, setSlideProduct] = useState(null)
-    const [isShowNextSlide, setIsShowNextSlide] = useState(false)
-    const [isShowPrevSlide, setIsShowPrevSlide] = useState(false)
-    const [isDisableNextIcon, setIsDisableNextIcon] = useState(false)
-    const [isDisablePrevIcon, setIsDisablePrevIcon] = useState(false)
+    const [state, dispatch] = useReducer(reducer, initialState)
+    const { productIndex, nextSliderProduct, prevSliderProduct, isDisableNextIcon, isDisablePrevIcon, isShowNextSlide, isShowPrevSlide } = state;
 
     const products = useSelector(state => state.products.products)
     const cartItems = useSelector(state => state.cart.userCart)
 
-    const { handleAddCart, isProductInCart, addToCartStatus } = useAddCart(productId)
-    const { isProductLiked, addToWishlist } = useWishlist(productId)
+    //custom hooks 
+    const { handleAddCart, isProductInCart, addToCartStatus } = useAddCart(productId);
+    const { isProductLiked, addToWishlist } = useWishlist(productId);
 
-    //handle the slider
-    const findProductIndex = useCallback(() => {
-        const productIndex = products.findIndex(product => product.id == productId)
-        setProductIndex(productIndex)
+    //find index and handle disalbe btn
+    useEffect(() => {
+        const foundIndex = products.findIndex(product => product.id == productId)
+        const isDisableNext = products.length - 1 <= foundIndex ? false : true;
+        const isDisablePrev = foundIndex == 0 ? false : true
 
-        products.length - 1 <= productIndex ? setIsDisableNextIcon(false) : setIsDisableNextIcon(true);
-        productIndex == 0 ? setIsDisablePrevIcon(false) : setIsDisablePrevIcon(true)
+        dispatch({ type: 'SET_PRODUCT_INDEX', payload: foundIndex })
+        dispatch({ type: 'SET_NEXT_DISABLE', payload: isDisableNext })
+        dispatch({ type: 'SET_PREV_DISABLE', payload: isDisablePrev })
 
     }, [productId, products])
 
+    // useEffect block to update next and previous slider products based on productId and state.productIndex
+    useEffect(() => {
+        if (productIndex !== -1 && productIndex < products.length - 1) {
+            dispatch({ type: 'SET_NEXT_SLIDER_PRODUCT', payload: products[productIndex + 1] })
+        }
+        if (productIndex > 0) {
+            dispatch({ type: 'SET_PREV_SLIDER_PRODUCT', payload: products[productIndex - 1] })
+        }
+    }, [productId, productIndex])
+
+
     //show slide handlere
     const showSlide = useCallback((mode) => {
-        findProductIndex()
-        if (mode === 'next' && productIndex < products.length - 1) {
-            setProductIndex(prev => {
-                setSlideProduct(products[prev + 1])
-                return prev
-            })
-            setIsShowNextSlide(true)
+        if (mode === 'next' && productIndex !== -1 && productIndex < products.length - 1) {
+            dispatch({ type: 'SET_SHOW_NEXT_SLIDE', payload: true })
         } else if (mode === 'prev' && productIndex > 0) {
-            setProductIndex(prev => {
-                setSlideProduct(products[prev - 1])
-                return prev
-            })
-            setIsShowPrevSlide(true)
+            dispatch({ type: 'SET_SHOW_PREV_SLIDE', payload: true })
         }
-    }, [productIndex, products, findProductIndex])
+    }, [productIndex, productId])
 
-    useEffect(() => {
-        findProductIndex()
-    }, [productId])
 
     //handle the product in cart 
     useEffect(() => {
@@ -76,50 +107,10 @@ const ProductDetail = ({ slideMode, id: productId, productName, productImage, de
 
 
 
-    //generate simple random number for the product id
-    const generateProductId = useMemo(() => {
-        return String(Math.floor(Math.random() * 124578245))
-    }, [productId])
-
     return (
         <div className="container product-detail-wrapper">
             <div className="product-detail-row">
-                <div className="product-picture">
-                    <Swiper
-                        style={{
-                            '--swiper-navigation-color': '#fff',
-                            '--swiper-pagination-color': '#fff',
-                        }}
-                        spaceBetween={10}
-                        navigation={true}
-                        thumbs={{ swiper: thumbsSwiper }}
-                        modules={[FreeMode, Navigation, Thumbs]}
-                        className="mySwiper3"
-                    >
-                        {
-                            productImage?.map((item, index) => {
-                                return <SwiperSlide key={index + 1} >
-                                    <img src={item} alt="" />
-                                </SwiperSlide>
-                            })
-                        }
-                    </Swiper>
-                    <Swiper
-                        onSwiper={setThumbsSwiper}
-                        spaceBetween={10}
-                        slidesPerView={4}
-                        freeMode={true}
-                        watchSlidesProgress={true}
-                        modules={[FreeMode, Navigation, Thumbs]}
-                        className="mySwiper4"
-                    >
-                        {
-                            productImage?.map((item, index) => {
-                                return <SwiperSlide key={index + 1}> <img src={item} alt="" /></SwiperSlide>
-                            })
-                        }
-                    </Swiper>
-                </div>
+                <ProductSlider productImage={productImage} />
                 <div className="product-infos">
                     <div className="product-row">
                         <h1 className='text-bold'>{productName}</h1>
@@ -127,24 +118,31 @@ const ProductDetail = ({ slideMode, id: productId, productName, productImage, de
                             slideMode && (
                                 <div className="slider-arrows text-gray">
                                     <div className="next-product-container" >
-                                        <div className="next-arrow" onMouseEnter={() => showSlide('next')} onMouseLeave={() => setIsShowNextSlide(false)} >
-                                            <Link to={`/product/${slideProduct?.id}`}>
-                                                <button disabled={!isDisableNextIcon}  >
+                                        <div className="next-arrow"
+                                            onMouseEnter={() => showSlide('next')}
+                                            onMouseLeave={() =>
+                                                dispatch({ type: 'SET_SHOW_NEXT_SLIDE', payload: false })}
+                                        >
+                                            <Link to={`/product/${nextSliderProduct?.id}`}>
+                                                <button disabled={!isDisableNextIcon}>
                                                     <MdArrowForwardIos />
                                                 </button>
                                             </Link>
-                                            {isShowNextSlide && <SliderProductPreview {...slideProduct} />}
+                                            {isShowNextSlide && <SliderProductPreview {...nextSliderProduct} />}
                                         </div>
                                     </div>
 
                                     <div className="prev-product-container">
-                                        <div className="prev-arrow" onMouseEnter={() => showSlide('prev')} onMouseLeave={() => setIsShowPrevSlide(false)}>
-                                            <Link to={`/product/${slideProduct?.id}`}>
+                                        <div className="prev-arrow" onMouseEnter={() => showSlide('prev')}
+                                            onMouseLeave={() =>
+                                                dispatch({ type: 'SET_SHOW_PREV_SLIDE', payload: false })}
+                                        >
+                                            <Link to={`/product/${prevSliderProduct?.id}`}>
                                                 <button disabled={!isDisablePrevIcon} >
                                                     <MdArrowBackIos />
                                                 </button>
                                             </Link>
-                                            {isShowPrevSlide && <SliderProductPreview {...slideProduct} />}
+                                            {isShowPrevSlide && <SliderProductPreview {...prevSliderProduct} />}
                                         </div>
                                     </div>
 
@@ -209,30 +207,51 @@ const ProductDetail = ({ slideMode, id: productId, productName, productImage, de
                             </div>
                         )
                     }
-                    <div className="border-line"></div>
-                    <div className="category-info">
-                        <div className="category-row">
-                            <span>دسته ها : </span>
-                            <span className='text-gray'>{category}</span>
-                        </div>
-                        <div className="category-row">
-                            <span>شناسه : </span>
-                            <span className='text-gray'>{generateProductId}</span>
-                        </div>
-                        <div className="category-row social-apps">
-                            <span>اشتراک گذاری : </span>
-                            <div className="share-row text-gray">
-                                <TiSocialFacebook />
-                                <FaTwitter />
-                                <FaPinterestP />
-                                <TiSocialLinkedin />
-                            </div>
-                        </div>
-                    </div>
+                    <CategoryInfo category={category} productId={productId} />
                 </div>
             </div>
         </div>
     )
+}
+
+const ProductSlider = ({ productImage }) => {
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+    return <div className="product-picture">
+        <Swiper
+            style={{
+                '--swiper-navigation-color': '#fff',
+                '--swiper-pagination-color': '#fff',
+            }}
+            spaceBetween={10}
+            navigation={true}
+            thumbs={{ swiper: thumbsSwiper }}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className="mySwiper3"
+        >
+            {
+                productImage?.map((item, index) => {
+                    return <SwiperSlide key={index + 1} >
+                        <img src={item} alt="" />
+                    </SwiperSlide>
+                })
+            }
+        </Swiper>
+        <Swiper
+            onSwiper={setThumbsSwiper}
+            spaceBetween={10}
+            slidesPerView={4}
+            freeMode={true}
+            watchSlidesProgress={true}
+            modules={[FreeMode, Navigation, Thumbs]}
+            className="mySwiper4"
+        >
+            {
+                productImage?.map((item, index) => {
+                    return <SwiperSlide key={index + 1}> <img src={item} alt="" /></SwiperSlide>
+                })
+            }
+        </Swiper>
+    </div>
 }
 const SliderProductPreview = ({ id, productImage, productName }) => {
     return (
@@ -246,6 +265,37 @@ const SliderProductPreview = ({ id, productImage, productName }) => {
                 <span>{productName}</span>
             </div>
         </div>
+    )
+}
+const CategoryInfo = ({ category, productId }) => {
+    //generate simple random number for the product id
+    const generateProductId = useMemo(() => {
+        return String(Math.floor(Math.random() * 124578245))
+    }, [productId])
+
+    return (
+        <>
+            <div className="border-line"></div>
+            <div className="category-info">
+                <div className="category-row">
+                    <span>دسته ها : </span>
+                    <span className='text-gray'>{category}</span>
+                </div>
+                <div className="category-row">
+                    <span>شناسه : </span>
+                    <span className='text-gray'>{generateProductId}</span>
+                </div>
+                <div className="category-row social-apps">
+                    <span>اشتراک گذاری : </span>
+                    <div className="share-row text-gray">
+                        <TiSocialFacebook />
+                        <FaTwitter />
+                        <FaPinterestP />
+                        <TiSocialLinkedin />
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 export default ProductDetail

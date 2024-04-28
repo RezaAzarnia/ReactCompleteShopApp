@@ -1,6 +1,6 @@
 .whyChooseUsWrapper {
   padding: 20px 20px 50px;
-  background: url(/public/section-background.jpg);
+  background: url(../section-background.jpg);
   background-position: center;
   .whyUsRow {
     @include grid($columns: 25% 50% 25%, $rows: auto, $gap: 10px);

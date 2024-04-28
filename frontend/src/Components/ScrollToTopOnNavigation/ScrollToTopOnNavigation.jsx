@@ -11,7 +11,7 @@ const ScrollToTopOnNavigation = () => {
             behavior: "instant"
         })
     }, [pathname])
-    
+
     return null
 }
 

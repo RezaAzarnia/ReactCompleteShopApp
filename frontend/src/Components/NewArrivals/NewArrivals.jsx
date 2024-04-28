@@ -1,7 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { GoArrowLeft } from "react-icons/go";
-import './newArrivals.scss'
+import './NewArrivals.scss'
+
 const NewArrivals = () => {
     return (
         <div className='container'>

@@ -42,6 +42,7 @@ const Register = ({ isUserLogin }) => {
         })
       }
       regitserResponse.status == 200 && reset();
+      setIsShowRegisterPart(false)
     } catch (error) {
       toast.error(error, {
         autoClose: 2000,
@@ -58,71 +59,71 @@ const Register = ({ isUserLogin }) => {
       <PageTitle title="ورود/ثبت نام" />
       <div className="container">
         <BreadCrump activePage='ثبت نام' />
-          <div className="register-container">
-            <div className="form-box">
-              <div className="form-header">
-                <div className={`register-tabpane-button ${!isShowRegisterPart ? 'active' : 'diactive'}`} onClick={() => setIsShowRegisterPart(false)}>
-                  <span className='tabpane-item'>
-                    ورود
-                  </span>
-                </div>
-                <div className={`register-tabpane-button ${isShowRegisterPart ? 'active' : 'diactive'}`} onClick={() => setIsShowRegisterPart(true)}>
-                  <span className='tabpane-item'>
-                    ثبت نام
-                  </span>
-                </div>
+        <div className="register-container">
+          <div className="form-box">
+            <div className="form-header">
+              <div className={`register-tabpane-button ${!isShowRegisterPart ? 'active' : 'diactive'}`} onClick={() => setIsShowRegisterPart(false)}>
+                <span className='tabpane-item'>
+                  ورود
+                </span>
               </div>
-              {
-                isShowRegisterPart ? (
-                  <FormProvider {...methods}>
-                    <form action="#">
-                      <Input name="username" type='text' lableTitle=" نام کاربری خود را وارد کنید"
-                        rules={
-                          {
-                            required: "لطفا نام کاربری خود را وارد کنید",
-                            minLength: { value: 3, message: "نام کاربری حداقل باید 3 کاراکتر باشد" },
-                            maxLength: { value: 32, message: "نام کاربر نمیتواند بیشتر از 32 کاراکتر باشد" },
-                          }
-                        } />
-                      <Input name="email" type="email" lableTitle="ایمیل خود را وارد کنید"
-                        rules={
-                          {
-                            required: "لطفا ایمیل خود را وارد کنید",
-                            pattern: {
-                              value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                              message: "ایمیل خود را به درستی وارد کنید"
-                            },
-                          }
-                        } />
-                      <Input name="password" type="password" lableTitle="رمزعبور عبور خود را وارد کنید"
-                        rules={
-                          {
-                            required: "لطفا رمزعبور خود را وارد کنید!",
-                            minLength: { value: 8, message: "رمزعبور حداقل باید 8 کاراکتر باشد" },
-                            maxLength: { value: 32, message: "رمزعبور نمیتواند بیشتر 32 کاراکتر باشد" },
-                          }
-                        } />
-                    </form>
-                    <div className="checkbox-row">
-
-                      <div className="check-website-rules">
-                        <input type="checkbox" id='checkout-rules-checkbox' defaultChecked required />
-                        <label htmlFor="checkout-rules-checkbox">
-                          تمامی قوانین سایت زا می‌پذیرم
-                        </label>
-                      </div>
-                    </div>
-                    <Button title='ثبت نام' onClick={handleSubmit(handleRegister)} isLoading={isLoading} />
-                  </FormProvider>
-                ) : (
-                  <>
-                    <LoginPart />
-                  </>
-                )
-              }
+              <div className={`register-tabpane-button ${isShowRegisterPart ? 'active' : 'diactive'}`} onClick={() => setIsShowRegisterPart(true)}>
+                <span className='tabpane-item'>
+                  ثبت نام
+                </span>
+              </div>
             </div>
+            {
+              isShowRegisterPart ? (
+                <FormProvider {...methods}>
+                  <form action="#">
+                    <Input name="username" type='text' lableTitle=" نام کاربری خود را وارد کنید"
+                      rules={
+                        {
+                          required: "لطفا نام کاربری خود را وارد کنید",
+                          minLength: { value: 3, message: "نام کاربری حداقل باید 3 کاراکتر باشد" },
+                          maxLength: { value: 32, message: "نام کاربر نمیتواند بیشتر از 32 کاراکتر باشد" },
+                        }
+                      } />
+                    <Input name="email" type="email" lableTitle="ایمیل خود را وارد کنید"
+                      rules={
+                        {
+                          required: "لطفا ایمیل خود را وارد کنید",
+                          pattern: {
+                            value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                            message: "ایمیل خود را به درستی وارد کنید"
+                          },
+                        }
+                      } />
+                    <Input name="password" type="password" lableTitle="رمزعبور عبور خود را وارد کنید"
+                      rules={
+                        {
+                          required: "لطفا رمزعبور خود را وارد کنید!",
+                          minLength: { value: 8, message: "رمزعبور حداقل باید 8 کاراکتر باشد" },
+                          maxLength: { value: 32, message: "رمزعبور نمیتواند بیشتر 32 کاراکتر باشد" },
+                        }
+                      } />
+                  </form>
+                  <div className="checkbox-row">
+
+                    <div className="check-website-rules">
+                      <input type="checkbox" id='checkout-rules-checkbox' defaultChecked required />
+                      <label htmlFor="checkout-rules-checkbox">
+                        تمامی قوانین سایت زا می‌پذیرم
+                      </label>
+                    </div>
+                  </div>
+                  <Button title='ثبت نام' onClick={handleSubmit(handleRegister)} isLoading={isLoading} />
+                </FormProvider>
+              ) : (
+                <>
+                  <LoginPart />
+                </>
+              )
+            }
           </div>
         </div>
+      </div>
     </>
   )
 }

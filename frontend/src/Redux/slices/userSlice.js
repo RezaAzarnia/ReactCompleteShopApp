@@ -47,7 +47,7 @@ const userSlice = createSlice({
       document.cookie = `userData=${JSON.stringify(
         userInfo
       )};expires=${new Date(
-        date.getTime() + 1 * 24 * 60 * 60 * 1000
+        date.getTime() + 2 * 24 * 60 * 60 * 1000
       ).toUTCString()};path=/`;
 
       state.userInfo = userInfo;

@@ -1,6 +1,6 @@
 import React from 'react'
 import Button from '../../Components/Button/Button'
-import './Notfound.scss'
+import './NotFound.scss'
 const NotFoundPage = () => {
   return (
     <div className="container">

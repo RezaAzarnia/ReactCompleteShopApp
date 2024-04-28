@@ -23,9 +23,9 @@ const Home = () => {
         <img
           sizes="(max-width: 1240px) 100vw, 1240px"
           srcSet="
-            /public/burger_ivaaio_c_scale,w_200.jpg 200w,
-            /public/burger_ivaaio_c_scale,w_965.jpg 965w,
-            /public/burger_ivaaio_c_scale,w_1240.jpg 1240w"
+            ./burger_ivaaio_c_scale,w_200.jpg 200w,
+            ./burger_ivaaio_c_scale,w_965.jpg 965w,
+            ./burger_ivaaio_c_scale,w_1240.jpg 1240w"
           src="burger_ivaaio_c_scale,w_1240.jpg"
           alt="" />
         <div className="topSalerInfo">

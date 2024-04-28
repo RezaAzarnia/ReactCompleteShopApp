@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchAllProducts } from './Redux/slices/productsSlice'
 import { clearWishlist, getWishListItems } from './Redux/slices/wishListSlice'
 import { clearCart, getUserCart } from './Redux/slices/cartSlice'
-import ScrollToTopOnNavigation from './Components/ScrollToTopOnNavigation/ScrollToTopOnNavigation.jsx';
 import routes from './routes/routes'
-import './App.scss'
 
 function App() {
   const userInfo = useSelector(state => state.user.userInfo)
@@ -31,9 +29,7 @@ function App() {
   return (
     <>
       <ToastContainer rtl />
-      <RouterProvider router={routes}>
-        <ScrollToTopOnNavigation />
-      </RouterProvider>
+      <RouterProvider router={routes}/>
     </>
   )
 }

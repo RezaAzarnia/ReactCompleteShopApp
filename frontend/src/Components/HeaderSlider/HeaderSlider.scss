@@ -1,7 +1,6 @@
 .headerSliderContainer {
   .slider-picture {
-    @include size(100%, 80vh);
-    max-height: 75vh;
+    @include size(100%, 75vh);
     @include grid($columns: repeat(3, 1fr), $rows: repeat(3, 1fr));
     justify-items: center;
     align-items: center;
@@ -58,7 +57,7 @@
     grid-template-columns: 1fr;
     justify-items: start;
   }
-  .slider-title h1{
+  .slider-title h1 {
     font-size: 35px;
   }
   .slider-text-wrapper {

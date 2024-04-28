@@ -43,5 +43,6 @@
 @media screen and (max-width: 1200px) {
   .cart-summary-container {
     min-width: 250px;
+    min-height: unset;
   }
 }

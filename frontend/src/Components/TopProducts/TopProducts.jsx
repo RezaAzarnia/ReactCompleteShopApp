@@ -36,10 +36,10 @@ const TopProducts = () => {
         return categoriesObject
     }, [products]);
 
-    const [activeCategory, setActiveCategory] = useState(categories[0].title);
+    const [activeCategory, setActiveCategory] = useState(categories[0]?.title);
 
     const filteredProducts = useMemo(() => {
-        return products?.filter(product => product.category === activeCategory.title)
+        return products?.filter(product => product.category === activeCategory?.title)
     }, [products, activeCategory]);
 
     useEffect(() => {
@@ -56,7 +56,7 @@ const TopProducts = () => {
                 icon={category.icon && category.icon}
                 key={index + 1}
                 onClick={() => handleTabClick(category)}
-                active={category.title === activeCategory.title}
+                active={category?.title === activeCategory.title}
             />
         })
     }, [activeCategory])

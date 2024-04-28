@@ -26,3 +26,9 @@
     grid-template-columns: auto;
   }
 }
+@include device-breakpoint("large-mobile") {
+  .chackeout-row {
+    margin: 20px 0;
+    flex-direction: column;
+  }
+}
