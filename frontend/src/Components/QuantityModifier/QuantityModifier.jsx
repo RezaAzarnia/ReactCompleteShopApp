@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { handleDeleteCartItem, handleUpdateQuantity } from '../../Redux/slices/cartSlice'
 import './QuantityModifier.scss'
 const QuantityModifier = ({ quantity, productId }) => {
-
     const userInfo = useSelector(state => state.user.userInfo)
 
     const [loading, setLoading] = useState(false)

@@ -12,39 +12,39 @@ import Slider from '../../Components/Slider/Slider'
 import './Product.scss';
 
 
+const ingredients = [
+    {
+        title: 'مواد : ',
+        info: 'لورم ایپسوم متن ساختگی است.'
+    },
+    {
+        title: 'اندازه : ',
+        info: 'کوچک و بزرگ'
+    },
+    {
+        title: 'استفاده پیشنهادی : ',
+        info: 'لورم ایپسوم متن ساختگی است.'
+    },
+    {
+        title: 'سازدنده : ',
+        info: 'لورم ایپسوم متن ساختگی است.'
+    }
+];
+const deliveryInfos = [
+    {
+        mainInfo: 'ارسال رایگان برای سفارش های بالای 100 تومان',
+        subInfo: 'ارسال رایگان و ضمانت عودت محصول'
+    },
+    {
+        mainInfo: 'دسترسی فوری به پشتیبانی کامل',
+        subInfo: 'پشتیبانی مشتری 24/7'
+    },
+    {
+        mainInfo: 'ما پرداخت مطمئن را تضمین می کنیم!',
+        subInfo: 'پرداخت 100% مطمئن'
+    }
+]
 const ProductDetailDescription = ({ description }) => {
-    const ingredients = [
-        {
-            title: 'مواد : ',
-            info: 'لورم ایپسوم متن ساختگی است.'
-        },
-        {
-            title: 'اندازه : ',
-            info: 'کوچک و بزرگ'
-        },
-        {
-            title: 'استفاده پیشنهادی : ',
-            info: 'لورم ایپسوم متن ساختگی است.'
-        },
-        {
-            title: 'سازدنده : ',
-            info: 'لورم ایپسوم متن ساختگی است.'
-        }
-    ];
-    const deliveryInfos = [
-        {
-            mainInfo: 'ارسال رایگان برای سفارش های بالای 100 تومان',
-            subInfo: 'ارسال رایگان و ضمانت عودت محصول'
-        },
-        {
-            mainInfo: 'دسترسی فوری به پشتیبانی کامل',
-            subInfo: 'پشتیبانی مشتری 24/7'
-        },
-        {
-            mainInfo: 'ما پرداخت مطمئن را تضمین می کنیم!',
-            subInfo: 'پرداخت 100% مطمئن'
-        }
-    ]
     return (
         <div className="container">
             <div className="product-detail-tabpane">

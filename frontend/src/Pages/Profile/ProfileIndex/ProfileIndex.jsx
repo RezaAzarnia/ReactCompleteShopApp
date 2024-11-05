@@ -8,20 +8,6 @@ import ExitModal from '../../../Components/Modals/ExitModal/ExitModal';
 import WithAuth from '../../../HOC/WithAuth'
 import './ProfileIndex.scss'
 
-const ProfileMenuItem = ({ item, onClick }) => {
-  return (
-    <div className="profile-menu-card" key={item.id} onClick={onClick}>
-      <Link to={item.to} className='menu-card-link'>
-        <div className="card-icon">
-          {item.icon}
-        </div>
-        <div className='card-text'>
-          <span>{item.text}</span>
-        </div>
-      </Link>
-    </div>
-  )
-}
 
 const ProfileIndex = ({ userInfo }) => {
   const [isShowModal, setIsShowModal] = useState(false)
@@ -32,7 +18,6 @@ const ProfileIndex = ({ userInfo }) => {
     { id: 4, to: '/profile/accountdetail', icon: <BiUser />, text: 'جزئیات حساب کاربری' },
     { id: 2, to: '/profile/downloads', icon: <SlCloudDownload />, text: 'دانلود ها' },
     { id: 3, to: '/profile/address', icon: <CiLocationOn />, text: 'آدرس' },
-    { id: 6, icon: <CiLogout />, text: 'خروج از حساب کاربری' }
   ];
   const handleModalToggle = () => {
     setIsShowModal(!isShowModal);
@@ -54,17 +39,35 @@ const ProfileIndex = ({ userInfo }) => {
         </p>
       </div>
       <div className='profile-cards-row'>
-
         {
           profileCardMenu.map(item => {
-            const onClick = item.to ? null : handleModalToggle;
-            return <ProfileMenuItem key={item.id} item={item} onClick={onClick} />;
+            return <ProfileMenuItem key={item.id} item={item} />;
           })
         }
-
-      </div >
+        <button className="profile-menu-card" onClick={handleModalToggle}>
+          <div className="card-icon"><CiLogout /></div>
+          <div className='card-text'>
+            <span>خروج از حساب کاربری</span>
+          </div>
+        </button>
+      </div>
     </>
   )
 }
 
 export default WithAuth(ProfileIndex)
+
+const ProfileMenuItem = ({ item }) => {
+  return (
+    <div className="profile-menu-card" key={item.id}>
+      <Link to={item.to} className='menu-card-link'>
+        <div className="card-icon">
+          {item.icon}
+        </div>
+        <div className='card-text'>
+          <span>{item.text}</span>
+        </div>
+      </Link>
+    </div>
+  )
+}

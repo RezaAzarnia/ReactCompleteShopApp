@@ -35,10 +35,10 @@ const cartUpdate = async (userId, userCartValues, product) => {
   const newCartValues = [...existCartItems, product];
 
   const productIndex = existCartItems.findIndex(
-    (item) => item.id == product.id
+    (item) => item.productId == product.productId
   );
   if (productIndex !== -1) {
-    const update = await updateQuantity(userId, product.id, "increase");
+    const update = await updateQuantity(userId, product.productId, "increase");
     return update;
   } else {
     try {
@@ -55,7 +55,7 @@ const updateQuantity = async (userId, productId, mode) => {
   const userCart = await getUserCartInfo(userId);
   const { cartItems: userCartItems, id } = userCart[0];
 
-  const productIndex = userCartItems.findIndex((item) => item.id == productId);
+  const productIndex = userCartItems.findIndex((item) => item.productId == productId);
 
   //mode handling
   mode == "increase"
@@ -75,7 +75,7 @@ const updateQuantity = async (userId, productId, mode) => {
 const deleteUserCartItem = async (userId, productId) => {
   const userCart = await getUserCartInfo(userId);
   const filteredCart = userCart[0].cartItems.filter((product) => {
-    return product.id != productId;
+    return product.productId != productId;
   });
   try {
     const updatedItems = await baseURL.put(`/userCart/${userCart[0].id}`, {
@@ -92,7 +92,6 @@ const clearUserCart = async (userId) => {
   const response = await baseURL.patch(`/userCart/${userCartInfo[0].id}`, {
     cartItems: [],
   });
-  console.log(response);
   return response;
 };
 export {

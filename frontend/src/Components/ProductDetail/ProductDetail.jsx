@@ -53,7 +53,8 @@ const reducer = (state, action) => {
     }
 }
 
-const ProductDetail = ({ slideMode, id: productId, productName, productImage, description, price, category, rate }) => {
+const ProductDetail = ({ slideMode, id: productId, productName, productImage, description, price, category, rate , quantity}) => {
+  const [productQuantity, setProductQuantity] = useState(quantity)
     const [state, dispatch] = useReducer(reducer, initialState)
     const { productIndex, nextSliderProduct, prevSliderProduct, isDisableNextIcon, isDisablePrevIcon, isShowNextSlide, isShowPrevSlide } = state;
 
@@ -100,7 +101,8 @@ const ProductDetail = ({ slideMode, id: productId, productName, productImage, de
     //handle the product in cart 
     useEffect(() => {
         if (isProductInCart) {
-            const cartItem = cartItems.find(item => item.id == productId)
+            const cartItem = cartItems.find(item => item.productId == productId)
+            // console.log(cartItem);
             cartItem && setProductQuantity(cartItem.quantity)
         }
     }, [isProductInCart, cartItems]);
@@ -187,8 +189,8 @@ const ProductDetail = ({ slideMode, id: productId, productName, productImage, de
                                 <div className="see-cart">
                                     <p>در سبد شما</p>
                                     <p>
-                                        {"مشاهده  "}
-                                        <Link to='/cart'>سبد خرید</Link>
+                                        مشاهده&nbsp;
+                                        <Link to='/cart'>سبد خرید </Link>
                                     </p>
                                 </div>
                             </div>
@@ -196,7 +198,7 @@ const ProductDetail = ({ slideMode, id: productId, productName, productImage, de
                             <div className="add-to-cart">
                                 <button className='addCartButton'
                                     disabled={addToCartStatus == 'loading'}
-                                    onClick={() => handleAddCart(+productId, productName, price, productImage)}>
+                                    onClick={() => handleAddCart({productId, productName, price, productImage})}>
                                     {
                                         addToCartStatus == 'loading' ? <div className="button-loader"></div> : <>
                                             <BsBag className='bag-icon' />

@@ -10,7 +10,7 @@ const Receipt = () => {
   const { orderId } = useParams()
   const [userOrderInfo, setUserOrderInfo] = useState({})
   const navigate = useNavigate()
-  
+
   useEffect(() => {
     const getOrderInfo = async () => {
       try {
@@ -42,26 +42,21 @@ const Receipt = () => {
               <h1>متشکرم.سفارش شما دریافت شد</h1>
             </div>
 
-            <Table>
-              <thead>
-                <tr className='receipt-table-row'>
-                  <th>شماره سفارش</th>
-                  <th>وضعیت</th>
-                  <th>تاریخ</th>
-                  <th>جمع کل</th>
-                  <th>روش پرداخت</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className='receipt-table-row'>
-                  <td data-label="شماره سفارش : ">{userOrderInfo?.id}</td>
-                  <td data-label="وضعیت : ">تکمیل</td>
-                  <td data-label="تاریخ : ">{userOrderInfo?.orderDate}</td>
-                  <td data-label="جمع کل : ">{userOrderInfo?.totalPrice} تومان</td>
-                  <td data-label="روش پرداخت :">{userOrderInfo?.paymentMode == 'cashMode' ? 'پرداخت هنگام دریافت' : 'انتقال مستقیم بانکی'}</td>
-                </tr>
-              </tbody>
-            </Table>
+            <Table
+              headerItems={["شماره سفارش", "وضعیت", "تاریخ", "جمع کل", "روش پرداخت"]}
+              tableRowClassName={"receipt-table-row"}
+              render={() => {
+                return (
+                  <tr className='receipt-table-row'>
+                    <td data-label="شماره سفارش : ">{userOrderInfo?.id}</td>
+                    <td data-label="وضعیت : ">تکمیل</td>
+                    <td data-label="تاریخ : ">{userOrderInfo?.orderDate}</td>
+                    <td data-label="جمع کل : ">{userOrderInfo?.totalPrice} تومان</td>
+                    <td data-label="روش پرداخت :">{userOrderInfo?.paymentMode == 'cashMode' ? 'پرداخت هنگام دریافت' : 'انتقال مستقیم بانکی'}</td>
+                  </tr>
+                )
+              }}
+            />
             <OrderReceit orderInfo={userOrderInfo} />
 
           </div>

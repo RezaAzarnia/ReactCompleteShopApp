@@ -20,11 +20,11 @@ export const getUserCart = createAsyncThunk("getCartValues", async (userId) => {
 });
 export const addToCart = createAsyncThunk("addTo/cart", async (info) => {
   const { userId, productInfo } = info;
-
   const respose = await addProductToCart(userId, {
     ...productInfo,
     quantity: 1,
   });
+  console.log(respose);
   return respose.reverse();
 });
 export const handleUpdateQuantity = createAsyncThunk(

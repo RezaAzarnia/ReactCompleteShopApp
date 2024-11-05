@@ -13,6 +13,7 @@ import './WishList.scss'
 const WishList = ({ userInfo }) => {
     const userWishListItems = useSelector(state => state.wishList.wishlistItems)
     const { handleAddCart, addToCartStatus } = useAddCart()
+    const dispatch = useDispatch()
     return (
         <div className='wishlistWrapper'>
             <PageTitle title="لیست علاقه مندی ها" />
@@ -25,76 +26,83 @@ const WishList = ({ userInfo }) => {
                                 <div className="wishlistTitle">
                                     <h3>لیست علاقه مندی ها</h3>
                                 </div>
-                                <Table>
-                                    <thead>
-                                        <tr className='wishlist-table-row'>
-                                            <th data-label="محصول">محصول</th>
-                                            <th data-label="قیمت">قیمت</th>
-                                            <th data-label="انبار">وضعیت انبار</th>
-                                            <th data-label="محصول">اقدامات</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {
-                                            userWishListItems.map(item => {
-                                                return <WishListItem
-                                                    key={item.productId}
-                                                    item={item}
-                                                    handleAdd={() => handleAddCart(item.productId, item.productName, item.price, item.productCover)}
-                                                    handleDelete={() => handleDeleteLikedProduct({ userId: userInfo.id, productId: item.productId })}
-                                                    status={addToCartStatus}
-                                                />
-                                            })
-                                        }
-                                    </tbody>
-                                </Table>
+                                <Table
+                                    headerItems={["محصول", "قیمت", "انبار", "اقدامات"]}
+                                    tableRowClassName={"wishlist-table-row"}
+                                    data={userWishListItems}
+                                    render={(product) => {
+                                        return (
+                                            <tr className='wishlist-table-row' key={product.productId}>
+                                                <td className='product-table-picture' >
+                                                    <div className="image-part">
+                                                        <button onClick={() => dispatch(handleDeleteLikedProduct({ userId: userInfo.id, productId: product.productId, }))}>
+                                                            <IoMdClose />
+                                                        </button>
+                                                        <img src={product.productCover} alt="" />
+                                                    </div>
+                                                    <span>{product.productName} </span>
+                                                </td>
+                                                <td className='price' data-label='قیمت : '>
+                                                    {product.price.toLocaleString('fa-IR')} تومان
+                                                </td>
+                                                <td className='inStock' data-label="انبار : ">
+                                                    در انبار
+                                                </td>
+                                                <td>
+                                                    <Button title="مشاهده سریع" variant='outlined' />
+                                                    <Button title="اضافه کردن به سبد خرید" onClick={() => handleAddCart(product)}
+                                                        isLoading={addToCartStatus == 'loading' && true}
+                                                    />
+                                                </td>
+                                            </tr>
+                                        )
+                                    }}
+                                />
                             </>
-                            : <EmptyWishList />
+                            : <div className="empty-wishlist">
+                                <EmptyWishlistIcon />
+                                <p>لیست علاقه مندی ها خالی است</p>
+                            </div>
                     }
                 </div>
             </div>
         </div>
     )
 }
-const WishListItem = ({ item, status, handleAdd, handleDelete }) => {
-    const dispatch = useDispatch()
-    const [isShowLoader, setIsShowLoader] = useState(false)
+// const WishListItem = ({ item, status, handleAdd, handleDelete }) => {
+//     const dispatch = useDispatch()
+//     const [isShowLoader, setIsShowLoader] = useState(false)
 
-    useEffect(() => {
-        status !== "loading" && setIsShowLoader(false)
-    }, [status])
-    return <tr className='wishlist-table-row'>
-        <td className='product-table-picture' >
-            <div className="image-part">
-                <button onClick={() => dispatch(handleDelete())}>
-                    <IoMdClose />
-                </button>
-                <img src={item.productCover} alt="" />
-            </div>
-            <span>{item.productName} </span>
-        </td>
-        <td className='price' data-label='قیمت : '>
-            {item.price.toLocaleString('fa-IR')} تومان
-        </td>
-        <td className='inStock' data-label="انبار : ">
-            در انبار
-        </td>
-        <td>
-            <Button title="مشاهده سریع" variant='outlined' />
-            <Button title="اضافه کردن به سبد خرید"
-                onClick={() => {
-                    handleAdd()
-                    setIsShowLoader(true)
-                }}
-                isLoading={isShowLoader && status == 'loading' ? true : false}
-            />
-        </td>
-    </tr>
-}
-const EmptyWishList = () => {
-    return (<div className="empty-wishlist">
-        <EmptyWishlistIcon />
-        <p>لیست علاقه مندی ها خالی است</p>
-    </div>)
-}
+//     useEffect(() => {
+//         status !== "loading" && setIsShowLoader(false)
+//     }, [status])
+//     return <tr className='wishlist-table-row'>
+//         <td className='product-table-picture' >
+//             <div className="image-part">
+//                 <button onClick={() => dispatch(handleDelete())}>
+//                     <IoMdClose />
+//                 </button>
+//                 <img src={item.productCover} alt="" />
+//             </div>
+//             <span>{item.productName} </span>
+//         </td>
+//         <td className='price' data-label='قیمت : '>
+//             {item.price.toLocaleString('fa-IR')} تومان
+//         </td>
+//         <td className='inStock' data-label="انبار : ">
+//             در انبار
+//         </td>
+//         <td>
+//             <Button title="مشاهده سریع" variant='outlined' />
+//             <Button title="اضافه کردن به سبد خرید"
+//                 onClick={() => {
+//                     handleAdd()
+//                     setIsShowLoader(true)
+//                 }}
+//                 isLoading={isShowLoader && status == 'loading' ? true : false}
+//             />
+//         </td>
+//     </tr>
+// }
+
 export default withAuth(WishList)

@@ -15,9 +15,10 @@ const useAddCart = (productId) => {
     const navigate = useNavigate()
 
 
-    const handleAddCart = useCallback((productId, productName, price, productImage) => {
-        const productCover = Array.isArray(productImage) ? productImage[0] : productImage;
-        const productInfo = { id: productId, productName, price, productCover }
+    const handleAddCart = useCallback((product) => {
+        const productPic = Array.isArray(product.productImage) ? product.productImage[0] : product.productCover;
+        const { productImage, productCover, ...mainProduct } = product;
+        const productInfo = { ...mainProduct, productCover: productPic }
         if (isUserLogin) {
             disPatch(addToCart({ userId: userInfo.id, productInfo }))
         } else {
@@ -28,7 +29,7 @@ const useAddCart = (productId) => {
     const updateProducStatus = useCallback(() => {
         if (isUserLoggedin) {
             const isProductInCart1 = userCart.some(item => {
-                return item.id == +productId
+                return item.productId == productId
             })
             return isProductInCart1 ? setIsProductInCart(true) : setIsProductInCart(false)
         }

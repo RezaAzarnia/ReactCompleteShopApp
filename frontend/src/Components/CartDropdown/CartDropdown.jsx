@@ -11,10 +11,10 @@ const CartDropdown = () => {
     const cartLength = useSelector(selectUserCartLength)
     const cartItems = useSelector(state => state.cart.userCart)
     const cartTotalPrice = useSelector(selectCartTotalPrice)
-    
+
     const renderCartItems = () => {
         return cartItems.map(item => (
-            <div className="cart-item" key={item.id}>
+            <div className="cart-item" key={item.productId}>
                 <div className="cart-row">
                     <div className="cart-picture">
                         <img src={item.productCover} alt="" />
@@ -25,7 +25,7 @@ const CartDropdown = () => {
                             <h3>{item.price.toLocaleString('fa-IR')}</h3>
                         </div>
                     </div>
-                    <QuantityModifier quantity={item.quantity} productId={item.id} />
+                    <QuantityModifier quantity={item.quantity} productId={item.productId} />
                 </div>
             </div>
         ));

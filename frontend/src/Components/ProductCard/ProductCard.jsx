@@ -59,7 +59,7 @@ const ProductCard = ({ id: productId, productName, price, productImage, descript
                         title='افزودن به سبد خرید'
                         onClick={() => {
                             toggleAddToCartLoader()
-                            handleAddCart(productId, productName, price, productImage)
+                            handleAddCart({productId, productName, price, productImage})
                         }}
                     >
                         {productLoader.addCartLoader && addToCartStatus == 'loading' ? <div className="spinner-loader"></div> : <BsBag />}
